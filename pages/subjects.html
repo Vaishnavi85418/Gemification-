@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore STEM subjects and play with interactive virtual laboratory experiments on STEM Quest. Conduct circuit building, gravity orbit simulations, and chemical mixing.">
+  <title>STEM Subjects & Interactive Lab – STEM Quest</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">S</div>
+        STEM Quest
+      </a>
+      
+      <ul class="nav-links" id="nav-links-container">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="subjects.html" class="active">STEM Subjects</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="career.html">Career Explorer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- HUD ITEMS -->
+        <div class="hud-item xp-hud" id="nav-xp" title="Experience Points">0 XP</div>
+        <div class="hud-item coin-hud" title="STEM Coins">🪙 <span id="nav-coins">0</span></div>
+        <div class="hud-item streak-hud" title="Daily Streak">🔥 <span id="nav-streak">3 Days</span></div>
+        <div class="hud-item" id="nav-level" style="background: var(--accent); color: #1E1E1E; font-weight: 800;">Lvl 1</div>
+        
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">🌙</button>
+        <a href="dashboard.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Dashboard</a>
+        <div class="menu-toggle" id="menu-toggle-btn">☰</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER HEADER -->
+  <section class="section-padding" style="padding-bottom: 20px; background: radial-gradient(circle at 90% 10%, rgba(108,76,241,0.05) 0%, transparent 50%);">
+    <div class="container text-center">
+      <h1 style="font-size: 2.75rem; margin-bottom: 12px;">STEM Subject Explorer</h1>
+      <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">Select a category to learn concepts tailored for classes 6–12, or run virtual experiments inside our hands-on STEM Lab below.</p>
+    </div>
+  </section>
+
+  <!-- SUBJECTS SECTION -->
+  <section class="section-padding" style="padding-top: 20px; padding-bottom: 50px;">
+    <div class="container">
+      <div class="subject-grid">
+        <!-- Physics -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <span class="subject-icon">⚡</span>
+            <span class="subject-class-tag">Class 6-12</span>
+          </div>
+          <h3>Physics World</h3>
+          <p class="subject-description">Learn about electricity, motion, light, heat, and gravity using physical analogies and formulas.</p>
+          <ul class="subject-topics">
+            <li>Electric Currents</li>
+            <li>Laws of Motion</li>
+            <li>Reflection of Light</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="quiz.html?sub=physics" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.8rem; border-radius: 12px;">Take Quiz (+50 XP)</a>
+          </div>
+        </div>
+
+        <!-- Chemistry -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <span class="subject-icon">🧪</span>
+            <span class="subject-class-tag">Class 6-12</span>
+          </div>
+          <h3>Chemistry Lab</h3>
+          <p class="subject-description">Understand matter, elements, acids, bases, chemical reactions, and the periodic table.</p>
+          <ul class="subject-topics">
+            <li>Acids & Bases</li>
+            <li>Atoms & Molecules</li>
+            <li>Metals & Non-metals</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="quiz.html?sub=chemistry" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.8rem; border-radius: 12px;">Take Quiz (+50 XP)</a>
+          </div>
+        </div>
+
+        <!-- Biology -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <span class="subject-icon">🌱</span>
+            <span class="subject-class-tag">Class 6-12</span>
+          </div>
+          <h3>Biology Kingdom</h3>
+          <p class="subject-description">Explore plant and animal cells, human anatomy, ecosystems, food chains, and agriculture.</p>
+          <ul class="subject-topics">
+            <li>Photosynthesis</li>
+            <li>Human Heart</li>
+            <li>Microorganisms</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="quiz.html?sub=biology" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.8rem; border-radius: 12px;">Take Quiz (+50 XP)</a>
+          </div>
+        </div>
+
+        <!-- Mathematics -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <span class="subject-icon">📐</span>
+            <span class="subject-class-tag">Class 6-12</span>
+          </div>
+          <h3>Mathematics Arena</h3>
+          <p class="subject-description">Solve algebraic equations, master geometric theorems, and learn to analyze statistical data easily.</p>
+          <ul class="subject-topics">
+            <li>Linear Equations</li>
+            <li>Pythagoras Theorem</li>
+            <li>Probability Basics</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="quiz.html?sub=math" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.8rem; border-radius: 12px;">Take Quiz (+50 XP)</a>
+          </div>
+        </div>
+
+        <!-- Technology -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <span class="subject-icon">💻</span>
+            <span class="subject-class-tag">Class 8-12</span>
+          </div>
+          <h3>Coding Academy</h3>
+          <p class="subject-description">Start coding with block-based logic, write Python code, and explore AI and computer science.</p>
+          <ul class="subject-topics">
+            <li>Python Loops</li>
+            <li>If-Else Logic</li>
+            <li>How AI Thinks</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="quiz.html?sub=coding" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.8rem; border-radius: 12px;">Take Quiz (+50 XP)</a>
+          </div>
+        </div>
+
+        <!-- Engineering -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <span class="subject-icon">⚙️</span>
+            <span class="subject-class-tag">Class 7-12</span>
+          </div>
+          <h3>Robotics & Design</h3>
+          <p class="subject-description">Learn simple robotics engineering, circuit building, and designing innovative solutions.</p>
+          <ul class="subject-topics">
+            <li>Battery & Bulbs</li>
+            <li>Gears & Pulleys</li>
+            <li>Rural Innovation</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="quiz.html?sub=engineering" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.8rem; border-radius: 12px;">Take Quiz (+50 XP)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE STEM LAB -->
+  <section class="lab-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <span style="background: var(--accent-glow); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; color: #D4AF37;">💻 STEM VIRTUAL LAB</span>
+        <h2 style="margin-top: 10px;">Hands-On STEM Simulations</h2>
+        <p>Interactive simulations where playing unlocks achievements. Click a tab to run the simulator and earn XP instantly.</p>
+      </div>
+
+      <div class="lab-container">
+        <!-- Lab Tabs -->
+        <div class="lab-sidebar">
+          <button class="lab-tab active" onclick="switchLab('circuit')">
+            <span>⚡</span> Electric Circuit
+            <span class="tab-xp">+50 XP</span>
+          </button>
+          <button class="lab-tab" onclick="switchLab('orbit')">
+            <span>🪐</span> Gravity & Orbit
+            <span class="tab-xp">+50 XP</span>
+          </button>
+          <button class="lab-tab" onclick="switchLab('chemical')">
+            <span>🧪</span> Chemical Mixer
+            <span class="tab-xp">+50 XP</span>
+          </button>
+        </div>
+
+        <!-- Lab Viewport -->
+        <div class="lab-viewport glass-card">
+          <!-- 1. Circuit Simulator -->
+          <div id="lab-circuit" class="lab-content-wrapper">
+            <div class="lab-title-bar">
+              <div>
+                <h3>Physics Lab: Connect the Circuit</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Connect the battery, wire, and switch to make the lightbulb glow.</p>
+              </div>
+              <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="resetCircuitLab()">Reset</button>
+            </div>
+            
+            <div class="lab-area">
+              <div class="circuit-board">
+                <!-- Battery -->
+                <div class="circuit-component" id="comp-battery" onclick="connectComponent('battery')">
+                  <span style="font-size: 2rem;">🔋</span>
+                  <span style="font-size: 0.8rem; font-weight: 600;">9V Battery</span>
+                </div>
+                
+                <div class="circuit-wire" id="wire-1"></div>
+
+                <!-- Switch -->
+                <div class="circuit-component" id="comp-switch" onclick="connectComponent('switch')">
+                  <div class="switch-knob" id="circuit-switch-knob"></div>
+                  <span style="font-size: 0.8rem; font-weight: 600;">Switch</span>
+                </div>
+
+                <div class="circuit-wire" id="wire-2"></div>
+
+                <!-- Bulb -->
+                <div class="circuit-component" id="comp-bulb" onclick="connectComponent('bulb')">
+                  <span class="bulb-icon" id="circuit-bulb">💡</span>
+                  <span style="font-size: 0.8rem; font-weight: 600;">Bulb</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Orbit Simulator -->
+          <div id="lab-orbit" class="lab-content-wrapper" style="display: none;">
+            <div class="lab-title-bar">
+              <div>
+                <h3>Space Lab: Gravity & Orbit</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Adjust gravity to see how it affects the speed and path of Earth and Mars orbiting the Sun.</p>
+              </div>
+              <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="resetOrbitLab()">Reset</button>
+            </div>
+
+            <div class="lab-area" style="background: #09080F;">
+              <div class="orbit-space">
+                <div class="orbit-sun"></div>
+                <!-- Orbit Ring 1 -->
+                <div class="orbit-ring orbit-ring-1"></div>
+                <div class="orbit-planet planet-earth" id="planet-earth" style="--orbit-radius: 90px;"></div>
+                
+                <!-- Orbit Ring 2 -->
+                <div class="orbit-ring orbit-ring-2"></div>
+                <div class="orbit-planet planet-mars" id="planet-mars" style="--orbit-radius: 140px;"></div>
+              </div>
+
+              <div class="orbit-controls">
+                <label style="font-size: 0.8rem; font-weight: 600; color: #1E1E1E;">Gravity Force:</label>
+                <input type="range" id="gravity-slider" min="0.5" max="3" step="0.1" value="1" oninput="adjustGravity(this.value)">
+                <span id="gravity-val" style="font-size: 0.85rem; font-weight: 700; color: #1E1E1E;">1.0x</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Chemical Simulator -->
+          <div id="lab-chemical" class="lab-content-wrapper" style="display: none;">
+            <div class="lab-title-bar">
+              <div>
+                <h3>Chemistry Lab: Neutralization Reaction</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Pour Acid (pH < 7) and Base (pH > 7) together in a beaker to see neutral salt water (pH = 7).</p>
+              </div>
+              <button class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="resetChemLab()">Reset</button>
+            </div>
+
+            <div class="lab-area">
+              <div class="chemical-workspace">
+                <!-- Acid Beaker -->
+                <div class="beaker">
+                  <div class="liquid acid-liq" id="acid-fluid"></div>
+                  <span class="beaker-label">Acid (HCl)<br>pH: 1</span>
+                  <button class="chem-btn-pour" id="pour-acid-btn" onclick="pourChemical('acid')">Pour</button>
+                </div>
+
+                <!-- Neutralizing Beaker -->
+                <div class="beaker" style="width: 120px; height: 150px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                  <div class="liquid" id="neutral-fluid" style="height: 0%; background: transparent;">
+                    <div class="fizzing-bubbles" id="chem-bubbles"></div>
+                  </div>
+                  <span class="beaker-label" style="bottom: -40px; font-weight: 700;" id="neutral-beaker-label">Reaction Tank</span>
+                </div>
+
+                <!-- Base Beaker -->
+                <div class="beaker">
+                  <div class="liquid base-liq" id="base-fluid"></div>
+                  <span class="beaker-label">Base (NaOH)<br>pH: 13</span>
+                  <button class="chem-btn-pour" id="pour-base-btn" onclick="pourChemical('base')">Pour</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 STEM Quest Platform. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="mailto:vaishnavichoudhari190@gmail.com" class="developer-credit">Vaishnavi J. Choudhari</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STATE ENGINE SCRIPT -->
+  <script src="../script.js"></script>
+
+  <!-- INTERACTIVE LAB LOGIC -->
+  <script>
+    // --- LAB TABS ---
+    function switchLab(labName) {
+      // Toggle active classes in sidebar buttons
+      const tabs = document.querySelectorAll('.lab-tab');
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.innerText.toLowerCase().includes(labName)) {
+          tab.classList.add('active');
+        }
+      });
+
+      // Toggle display of content boxes
+      document.getElementById('lab-circuit').style.display = labName === 'circuit' ? 'block' : 'none';
+      document.getElementById('lab-orbit').style.display = labName === 'orbit' ? 'block' : 'none';
+      document.getElementById('lab-chemical').style.display = labName === 'chemical' ? 'block' : 'none';
+      
+      // Track that student interacted
+      showToast(`Welcome to the ${labName.toUpperCase()} world!`, "info");
+    }
+
+    // --- 1. CIRCUIT SIMULATOR LOGIC ---
+    let circuitState = {
+      battery: false,
+      switch: false,
+      bulb: false,
+      switchedOn: false,
+      xpAwarded: false
+    };
+
+    function connectComponent(comp) {
+      if (circuitState.switchedOn) return;
+
+      const compEl = document.getElementById(`comp-${comp}`);
+      circuitState[comp] = !circuitState[comp];
+
+      if (circuitState[comp]) {
+        compEl.classList.add('connected');
+        showToast(`${comp.toUpperCase()} connected to circuit!`, "info");
+      } else {
+        compEl.classList.remove('connected');
+      }
+
+      checkCircuitCompletion();
+    }
+
+    function checkCircuitCompletion() {
+      const wire1 = document.getElementById('wire-1');
+      const wire2 = document.getElementById('wire-2');
+      const switchKnob = document.getElementById('circuit-switch-knob');
+      const bulb = document.getElementById('circuit-bulb');
+
+      if (circuitState.battery && circuitState.switch && circuitState.bulb) {
+        wire1.classList.add('active');
+        wire2.classList.add('active');
+        
+        // Turn switch on
+        circuitState.switchedOn = true;
+        switchKnob.classList.add('on');
+        bulb.classList.add('glowing');
+        
+        showToast("Success! The circuit is complete! Bulb is glowing!", "success");
+        
+        if (!circuitState.xpAwarded) {
+          addXP(50);
+          addCoins(10);
+          unlockBadge("Circuit Builder");
+          circuitState.xpAwarded = true;
+        }
+      } else {
+        wire1.classList.remove('active');
+        wire2.classList.remove('active');
+        switchKnob.classList.remove('on');
+        bulb.classList.remove('glowing');
+        circuitState.switchedOn = false;
+      }
+    }
+
+    function resetCircuitLab() {
+      circuitState = {
+        battery: false,
+        switch: false,
+        bulb: false,
+        switchedOn: false,
+        xpAwarded: false
+      };
+      document.getElementById('comp-battery').classList.remove('connected');
+      document.getElementById('comp-switch').classList.remove('connected');
+      document.getElementById('comp-bulb').classList.remove('connected');
+      document.getElementById('wire-1').classList.remove('active');
+      document.getElementById('wire-2').classList.remove('active');
+      document.getElementById('circuit-switch-knob').classList.remove('on');
+      document.getElementById('circuit-bulb').classList.remove('glowing');
+      showToast("Circuit reset. Try connecting all components!", "info");
+    }
+
+    // --- 2. ORBIT SIMULATOR LOGIC ---
+    let orbitState = {
+      gravity: 1.0,
+      xpAwarded: false
+    };
+
+    function adjustGravity(val) {
+      orbitState.gravity = val;
+      document.getElementById('gravity-val').innerText = `${val}x`;
+      
+      const earth = document.getElementById('planet-earth');
+      const mars = document.getElementById('planet-mars');
+      
+      // Speed is inversely proportional to animation-duration (higher gravity -> faster orbit)
+      const baseEarthDur = 10;
+      const baseMarsDur = 16;
+      
+      earth.style.animationDuration = `${baseEarthDur / val}s`;
+      mars.style.animationDuration = `${baseMarsDur / val}s`;
+
+      if (val != 1.0 && !orbitState.xpAwarded) {
+        addXP(50);
+        addCoins(5);
+        unlockBadge("Gravity Master");
+        orbitState.xpAwarded = true;
+      }
+    }
+
+    function resetOrbitLab() {
+      document.getElementById('gravity-slider').value = 1.0;
+      adjustGravity(1.0);
+      showToast("Planets orbit reset to normal gravity.", "info");
+    }
+
+    // --- 3. CHEMICAL MIXER LOGIC ---
+    let chemState = {
+      acidPoured: false,
+      basePoured: false,
+      xpAwarded: false
+    };
+
+    function pourChemical(type) {
+      if (type === 'acid' && !chemState.acidPoured) {
+        chemState.acidPoured = true;
+        document.getElementById('acid-fluid').style.height = '0%';
+        document.getElementById('pour-acid-btn').style.display = 'none';
+        showToast("Acid poured into reaction tank!", "warning");
+      }
+      
+      if (type === 'base' && !chemState.basePoured) {
+        chemState.basePoured = true;
+        document.getElementById('base-fluid').style.height = '0%';
+        document.getElementById('pour-base-btn').style.display = 'none';
+        showToast("Base poured into reaction tank!", "warning");
+      }
+
+      updateChemicalReaction();
+    }
+
+    function updateChemicalReaction() {
+      const tankFluid = document.getElementById('neutral-fluid');
+      const bubbles = document.getElementById('chem-bubbles');
+      const tankLabel = document.getElementById('neutral-beaker-label');
+
+      if (chemState.acidPoured && !chemState.basePoured) {
+        // Just acid: red fluid in center beaker
+        tankFluid.style.height = '40%';
+        tankFluid.style.background = '#FF4D4D';
+        tankLabel.innerText = "Acid Tank (pH: 1)";
+      } else if (!chemState.acidPoured && chemState.basePoured) {
+        // Just base: blue fluid in center beaker
+        tankFluid.style.height = '40%';
+        tankFluid.style.background = '#4D79FF';
+        tankLabel.innerText = "Base Tank (pH: 13)";
+      } else if (chemState.acidPoured && chemState.basePoured) {
+        // Both: neutral purple fluid with fizzing bubbles
+        tankFluid.style.height = '80%';
+        tankFluid.style.background = '#9B51E0';
+        tankLabel.innerHTML = "<span style='color: var(--success);'>Salt Water (pH: 7)<br>Neutralization!</span>";
+        
+        // Trigger bubble fizzing
+        bubbles.style.display = 'block';
+        bubbles.innerHTML = '';
+        for (let i = 0; i < 20; i++) {
+          const b = document.createElement('div');
+          b.className = 'bubble';
+          b.style.width = `${Math.random() * 8 + 4}px`;
+          b.style.height = b.style.width;
+          b.style.left = `${Math.random() * 90}%`;
+          b.style.animationDelay = `${Math.random() * 1}s`;
+          b.style.animationDuration = `${Math.random() * 1 + 0.8}s`;
+          bubbles.appendChild(b);
+        }
+
+        if (!chemState.xpAwarded) {
+          addXP(50);
+          addCoins(10);
+          unlockBadge("Chem Alchemist");
+          chemState.xpAwarded = true;
+        }
+        showToast("Success! Neutralization complete! Produced harmless salt water!", "success");
+      }
+    }
+
+    function resetChemLab() {
+      chemState = {
+        acidPoured: false,
+        basePoured: false,
+        xpAwarded: false
+      };
+      
+      document.getElementById('acid-fluid').style.height = '60%';
+      document.getElementById('base-fluid').style.height = '60%';
+      document.getElementById('pour-acid-btn').style.display = 'block';
+      document.getElementById('pour-base-btn').style.display = 'block';
+      
+      const tankFluid = document.getElementById('neutral-fluid');
+      tankFluid.style.height = '0%';
+      tankFluid.style.background = 'transparent';
+      document.getElementById('chem-bubbles').style.display = 'none';
+      document.getElementById('neutral-beaker-label').innerText = "Reaction Tank";
+      
+      showToast("Chemical elements restored.", "info");
+    }
+  </script>
+</body>
+</html>

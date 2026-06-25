@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete daily STEM challenges, maintain your learning streak, and win points on STEM Quest. Keep your consistency high!">
+  <title>Daily STEM Challenges & Streak – STEM Quest</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">S</div>
+        STEM Quest
+      </a>
+      
+      <ul class="nav-links" id="nav-links-container">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="subjects.html">STEM Subjects</a></li>
+        <li><a href="challenges.html" class="active">Challenges</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="career.html">Career Explorer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- HUD ITEMS -->
+        <div class="hud-item xp-hud" id="nav-xp" title="Experience Points">0 XP</div>
+        <div class="hud-item coin-hud" title="STEM Coins">🪙 <span id="nav-coins">0</span></div>
+        <div class="hud-item streak-hud" title="Daily Streak">🔥 <span id="nav-streak">3 Days</span></div>
+        <div class="hud-item" id="nav-level" style="background: var(--accent); color: #1E1E1E; font-weight: 800;">Lvl 1</div>
+        
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">🌙</button>
+        <a href="dashboard.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Dashboard</a>
+        <div class="menu-toggle" id="menu-toggle-btn">☰</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN COVER -->
+  <section class="section-padding" style="background: radial-gradient(circle at 90% 10%, rgba(108,76,241,0.04) 0%, transparent 50%);">
+    <div class="container">
+      <div class="section-header text-center" style="max-width: 700px;">
+        <span style="background: rgba(239, 68, 68, 0.15); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; color: #EF4444;">🔥 DAILY ADVENTURE</span>
+        <h1 style="font-size: 2.75rem; margin-top: 10px; margin-bottom: 12px;">Daily Missions & Streaks</h1>
+        <p style="color: var(--text-muted);">Learning every day keeps the STEM fear away! Complete your daily quests to earn bonus coins and keep your learning streak burning bright.</p>
+      </div>
+
+      <!-- Layout: Challenges & Streak calendar -->
+      <div class="quiz-layout">
+        
+        <!-- LEFT: Challenges Checklist -->
+        <div class="glass-card" style="padding: 40px;">
+          <h3 style="margin-bottom: 24px; font-size: 1.5rem; color: var(--primary);">Today's Missions</h3>
+          
+          <div class="challenges-checklist" id="checklist-container">
+            <!-- 1. Math Quest -->
+            <div class="challenge-item" id="quest-math">
+              <div class="challenge-checkbox" id="chk-math">✓</div>
+              <div style="flex-grow: 1;">
+                <h4 style="font-size: 1.05rem;">Math Master Quest</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Score at least 1 correct answer on any math quiz.</p>
+                <div style="display: flex; gap: 10px; font-size: 0.75rem; font-weight: 600; margin-top: 8px; color: var(--primary);">
+                  <span>⚡ +40 XP</span>
+                  <span>🪙 +10 Coins</span>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.75rem;" id="btn-claim-math" onclick="claimQuest('math', 40, 10)">Claim</button>
+            </div>
+
+            <!-- 2. Lab Quest -->
+            <div class="challenge-item" id="quest-lab">
+              <div class="challenge-checkbox" id="chk-lab">✓</div>
+              <div style="flex-grow: 1;">
+                <h4 style="font-size: 1.05rem;">Hands-On Lab Quest</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Complete any interactive simulation inside the STEM Lab.</p>
+                <div style="display: flex; gap: 10px; font-size: 0.75rem; font-weight: 600; margin-top: 8px; color: var(--success);">
+                  <span>⚡ +50 XP</span>
+                  <span>🪙 +15 Coins</span>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.75rem;" id="btn-claim-lab" onclick="claimQuest('lab', 50, 15)">Claim</button>
+            </div>
+
+            <!-- 3. Streak Quest -->
+            <div class="challenge-item" id="quest-streak">
+              <div class="challenge-checkbox" id="chk-streak">✓</div>
+              <div style="flex-grow: 1;">
+                <h4 style="font-size: 1.05rem;">Streak Consistency Reward</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Maintain a learning streak of 3 days or more.</p>
+                <div style="display: flex; gap: 10px; font-size: 0.75rem; font-weight: 600; margin-top: 8px; color: #D4AF37;">
+                  <span>⚡ +100 XP</span>
+                  <span>🪙 +30 Coins</span>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.75rem;" id="btn-claim-streak" onclick="claimQuest('streak', 100, 30)">Claim</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Streak Calendar -->
+        <div class="glass-card" style="padding: 40px; align-self: start;">
+          <h3 style="margin-bottom: 8px; font-size: 1.5rem; color: var(--primary);">Streak Calendar</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">Your current streak: <span style="font-weight: 800; color: #EF4444;" id="calendar-streak-num">3 Days</span> 🔥</p>
+
+          <!-- Simple calendar layout representing days of the week -->
+          <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center;" id="calendar-grid">
+            <!-- Dynamically generated via JS -->
+          </div>
+
+          <div style="margin-top: 30px; padding: 16px; border-radius: var(--radius-sm); background: var(--primary-glow); font-size: 0.8rem; line-height: 1.5;">
+            💡 **Why Streaks Matter:** Studying just 15 minutes every day helps build permanent pathways in your brain, replacing science and math fear with high-speed problem solving confidence!
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 STEM Quest Platform. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="mailto:vaishnavichoudhari190@gmail.com" class="developer-credit">Vaishnavi J. Choudhari</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STATE ENGINE SCRIPT -->
+  <script src="../script.js"></script>
+
+  <!-- CHALLENGES LOGIC -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderQuests();
+      renderStreakCalendar();
+
+      // Rerender when state changes
+      window.addEventListener("statechange", () => {
+        renderQuests();
+        renderStreakCalendar();
+      });
+    });
+
+    // Check completion conditions in state and render lists
+    function renderQuests() {
+      const state = getState();
+      
+      // 1. Math Quest Check: Did student complete any math quiz?
+      const quizKeys = Object.keys(state.completedQuizzes);
+      const mathQuizIds = ["math-geometry"]; // default math quizzes
+      const customMathQuizzes = state.customQuizzes.filter(q => q.subject === 'math').map(q => q.id);
+      const allMathIds = [...mathQuizIds, ...customMathQuizzes];
+      const hasSolvedMath = quizKeys.some(key => allMathIds.includes(key));
+
+      // 2. Lab Quest Check: Did student unlock any Lab badges?
+      const hasSolvedLab = state.user.badges.includes("Circuit Builder") || 
+                           state.user.badges.includes("Gravity Master") || 
+                           state.user.badges.includes("Chem Alchemist");
+
+      // 3. Streak Quest Check: Is streak >= 3?
+      const hasGoodStreak = state.user.streak >= 3;
+
+      // Update Math Quest UI
+      updateQuestUI('math', hasSolvedMath, "Quest claimed! Math master!", "Go solve a Math Quiz first!");
+      
+      // Update Lab Quest UI
+      updateQuestUI('lab', hasSolvedLab, "Quest claimed! Virtual lab scientist!", "Go play a STEM Lab experiment first!");
+
+      // Update Streak Quest UI
+      updateQuestUI('streak', hasGoodStreak, "Quest claimed! Consistency king!", "Keep learning to hit a 3-day streak!");
+    }
+
+    function updateQuestUI(type, isConditionMet, successClaimMessage, helperText) {
+      const state = getState();
+      const item = document.getElementById(`quest-${type}`);
+      const chk = document.getElementById(`chk-${type}`);
+      const btn = document.getElementById(`btn-claim-math`); // Generic holder helper
+      const claimBtn = document.getElementById(`btn-claim-${type}`);
+      const isClaimed = state.completedChallenges.includes(`quest-${type}`);
+
+      if (isClaimed) {
+        item.classList.add("completed");
+        chk.style.borderColor = "var(--success)";
+        chk.style.background = "var(--success)";
+        chk.style.color = "white";
+        claimBtn.innerText = "Claimed 🎉";
+        claimBtn.disabled = true;
+        claimBtn.classList.add("btn-secondary");
+        claimBtn.classList.remove("btn-primary");
+      } else if (isConditionMet) {
+        item.classList.remove("completed");
+        chk.style.borderColor = "var(--border-color)";
+        chk.style.background = "transparent";
+        chk.style.color = "transparent";
+        claimBtn.innerText = "Claim Reward";
+        claimBtn.disabled = false;
+        claimBtn.classList.add("btn-primary");
+        claimBtn.classList.remove("btn-secondary");
+      } else {
+        item.classList.remove("completed");
+        chk.style.borderColor = "var(--border-color)";
+        chk.style.background = "transparent";
+        chk.style.color = "transparent";
+        claimBtn.innerText = "Locked";
+        claimBtn.disabled = true;
+        claimBtn.classList.add("btn-secondary");
+        claimBtn.classList.remove("btn-primary");
+        claimBtn.title = helperText;
+      }
+    }
+
+    function claimQuest(type, xp, coins) {
+      const state = getState();
+      if (!state.completedChallenges.includes(`quest-${type}`)) {
+        state.completedChallenges.push(`quest-${type}`);
+        saveState(state);
+
+        addXP(xp);
+        addCoins(coins);
+        showToast(`Claimed daily reward! +${xp} XP & +${coins} Coins!`, "success");
+        renderQuests();
+      }
+    }
+
+    function renderStreakCalendar() {
+      const state = getState();
+      document.getElementById("calendar-streak-num").innerText = `${state.user.streak} Days`;
+      
+      const grid = document.getElementById("calendar-grid");
+      grid.innerHTML = "";
+
+      const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+      const currentStreak = state.user.streak; // e.g. 3
+
+      daysOfWeek.forEach((day, idx) => {
+        // Mock a calendar highlight
+        // Mon, Tue, Wed are highlighted if streak is 3
+        const isHighlighted = idx < currentStreak;
+        
+        const dayCell = document.createElement("div");
+        dayCell.className = "glass-card";
+        dayCell.style.padding = "10px 4px";
+        dayCell.style.borderRadius = "10px";
+        
+        if (isHighlighted) {
+          dayCell.style.background = "rgba(239, 68, 68, 0.15)";
+          dayCell.style.borderColor = "#EF4444";
+          dayCell.style.color = "#EF4444";
+          dayCell.innerHTML = `
+            <div style="font-size: 0.75rem; font-weight: 700;">${day}</div>
+            <div style="font-size: 1.1rem; margin-top: 4px;">🔥</div>
+          `;
+        } else {
+          dayCell.innerHTML = `
+            <div style="font-size: 0.75rem; font-weight: 500; color: var(--text-muted);">${day}</div>
+            <div style="font-size: 1.1rem; margin-top: 4px; opacity: 0.25;">⚫</div>
+          `;
+        }
+        grid.appendChild(dayCell);
+      });
+    }
+  </script>
+</body>
+</html>

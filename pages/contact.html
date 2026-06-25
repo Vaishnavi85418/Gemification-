@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch with the STEM Quest team. Provide feedback, report issues, or request school registration. Built by Vaishnavi J. Choudhari.">
+  <title>Contact Us – STEM Quest</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">S</div>
+        STEM Quest
+      </a>
+      
+      <ul class="nav-links" id="nav-links-container">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="subjects.html">STEM Subjects</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="career.html">Career Explorer</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- HUD ITEMS -->
+        <div class="hud-item xp-hud" id="nav-xp" title="Experience Points">0 XP</div>
+        <div class="hud-item coin-hud" title="STEM Coins">🪙 <span id="nav-coins">0</span></div>
+        <div class="hud-item streak-hud" title="Daily Streak">🔥 <span id="nav-streak">3 Days</span></div>
+        <div class="hud-item" id="nav-level" style="background: var(--accent); color: #1E1E1E; font-weight: 800;">Lvl 1</div>
+        
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">🌙</button>
+        <a href="dashboard.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Dashboard</a>
+        <div class="menu-toggle" id="menu-toggle-btn">☰</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN COVER -->
+  <section class="section-padding" style="background: radial-gradient(circle at 10% 20%, rgba(108,76,241,0.03) 0%, transparent 40%);">
+    <div class="container">
+      <div class="section-header text-center" style="max-width: 700px;">
+        <span style="background: var(--primary-glow); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; color: var(--primary);">📧 CONTACT US</span>
+        <h1 style="font-size: 2.75rem; margin-top: 10px; margin-bottom: 12px;">Get in Touch & Feedback</h1>
+        <p style="color: var(--text-muted);">Are you a student, teacher, parent, or school administrator? We would love to hear your feedback, suggestions, or requests to register your village school!</p>
+      </div>
+
+      <div class="quiz-layout" style="grid-template-columns: 1fr 1.2fr;">
+        <!-- Left: Details -->
+        <div class="glass-card" style="padding: 40px; align-self: start;">
+          <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 16px;">Contact Information</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">For official collaborations, school onboarding campaigns, or portal support, please reach out directly.</p>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <span style="font-size: 1.8rem; background: var(--primary-glow); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary);">📧</span>
+              <div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Official Email</div>
+                <a href="mailto:vaishnavichoudhari190@gmail.com" style="font-weight: 700; color: var(--text-main);">vaishnavichoudhari190@gmail.com</a>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <span style="font-size: 1.8rem; background: rgba(16, 185, 129, 0.15); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--success);">📍</span>
+              <div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Location</div>
+                <div style="font-weight: 700; color: var(--text-main);">Maharashtra, India</div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <span style="font-size: 1.8rem; background: rgba(255, 215, 0, 0.15); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #D4AF37;">🏫</span>
+              <div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Supported Initiative</div>
+                <div style="font-weight: 700; color: var(--text-main);">Gram Vikas Rural Education Trust</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Form -->
+        <div class="glass-card" style="padding: 40px;">
+          <h3 style="margin-bottom: 8px; font-size: 1.5rem; color: var(--primary);">Send a Message</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">Submitting this form stores your inquiry inside local storage representing high-fidelity persistence.</p>
+
+          <form id="contact-form" onsubmit="submitContactForm(event)">
+            <div class="form-group">
+              <label for="contact-name">Full Name:</label>
+              <input type="text" class="form-input" id="contact-name" placeholder="Vaishnavi Choudhari" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email">Email Address:</label>
+              <input type="email" class="form-input" id="contact-email" placeholder="vaishnavi@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-role">Select Your Role:</label>
+              <select class="form-input" id="contact-role" required>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="parent">Parent</option>
+                <option value="admin">School Administrator</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Your Message / Feedback:</label>
+              <textarea class="form-input" id="contact-message" rows="4" placeholder="How can we help you today?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message 🚀</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 STEM Quest Platform. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="mailto:vaishnavichoudhari190@gmail.com" class="developer-credit">Vaishnavi J. Choudhari</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STATE ENGINE SCRIPT -->
+  <script src="../script.js"></script>
+
+  <!-- CONTACT CONTROLLER -->
+  <script>
+    function submitContactForm(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("contact-name").value;
+      const email = document.getElementById("contact-email").value;
+      const role = document.getElementById("contact-role").value;
+      const message = document.getElementById("contact-message").value;
+
+      const newMessage = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        role: role,
+        message: message,
+        date: new Date().toISOString()
+      };
+
+      const state = getState();
+      state.contactMessages.push(newMessage);
+      saveState(state);
+
+      // Award XP for giving feedback!
+      addXP(15);
+      showToast(`Thank you, ${name}! Your feedback was saved and rewarded +15 XP!`, "success");
+      
+      document.getElementById("contact-form").reset();
+    }
+  </script>
+</body>
+</html>

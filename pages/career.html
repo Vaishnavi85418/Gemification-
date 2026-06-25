@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore exciting STEM careers and view interactive school-to-career path roadmaps on STEM Quest. Inspire your future in AI, engineering, science, or healthcare.">
+  <title>STEM Career Explorer – Discover Your Future</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">S</div>
+        STEM Quest
+      </a>
+      
+      <ul class="nav-links" id="nav-links-container">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="subjects.html">STEM Subjects</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="career.html" class="active">Career Explorer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- HUD ITEMS -->
+        <div class="hud-item xp-hud" id="nav-xp" title="Experience Points">0 XP</div>
+        <div class="hud-item coin-hud" title="STEM Coins">🪙 <span id="nav-coins">0</span></div>
+        <div class="hud-item streak-hud" title="Daily Streak">🔥 <span id="nav-streak">3 Days</span></div>
+        <div class="hud-item" id="nav-level" style="background: var(--accent); color: #1E1E1E; font-weight: 800;">Lvl 1</div>
+        
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">🌙</button>
+        <a href="dashboard.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Dashboard</a>
+        <div class="menu-toggle" id="menu-toggle-btn">☰</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN COVER -->
+  <section class="section-padding" style="background: radial-gradient(circle at 50% 100%, rgba(108,76,241,0.04) 0%, transparent 60%);">
+    <div class="container">
+      <div class="section-header text-center" style="max-width: 700px;">
+        <span style="background: var(--primary-glow); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; color: var(--primary);">🗺️ STEM CAREER MAPS</span>
+        <h1 style="font-size: 2.75rem; margin-top: 10px; margin-bottom: 12px;">STEM Career Explorer</h1>
+        <p style="color: var(--text-muted);">Where can science and math take you? Click on any modern career below to see a customized, step-by-step roadmap showing what to study from Class 6 all the way to college!</p>
+      </div>
+
+      <!-- Careers Layout -->
+      <div class="quiz-layout">
+        
+        <!-- LEFT: Career Grid -->
+        <div>
+          <h3 style="margin-bottom: 24px; font-size: 1.5rem; color: var(--primary);">Select a Career Pathway</h3>
+          <div class="subject-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;" id="careers-grid">
+            <!-- Dynamic Career Cards via JS -->
+          </div>
+        </div>
+
+        <!-- RIGHT: Interactive Roadmap Display -->
+        <div class="glass-card" style="padding: 40px; align-self: start;" id="roadmap-display-box">
+          <div id="roadmap-empty-state" class="text-center" style="padding: 40px 0;">
+            <span style="font-size: 3.5rem;">🗺️</span>
+            <h3 style="margin-top: 16px; margin-bottom: 8px;">Explore Your Path</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Click on any career card on the left to unlock its comprehensive, school-to-professional roadmap.</p>
+          </div>
+
+          <div id="roadmap-active-state" style="display: none;">
+            <h3 id="roadmap-career-name" style="color: var(--primary); font-size: 1.65rem; margin-bottom: 6px;">Software Engineer</h3>
+            <p id="roadmap-career-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Designs and builds apps, websites, and programs.</p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+              <span style="background: var(--primary-glow); color: var(--primary); padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;" id="roadmap-skills-tag">Python, Logic</span>
+              <span style="background: rgba(255,215,0,0.15); color: #B8860B; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;" id="roadmap-salary-tag">₹4L - ₹25L / yr</span>
+            </div>
+
+            <h4 style="margin-bottom: 20px; font-size: 1.15rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">School & College Roadmaps</h4>
+            <div class="career-roadmap-box" id="roadmap-steps-container">
+              <!-- Injected Dynamically -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 STEM Quest Platform. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="mailto:vaishnavichoudhari190@gmail.com" class="developer-credit">Vaishnavi J. Choudhari</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STATE ENGINE SCRIPT -->
+  <script src="../script.js"></script>
+
+  <!-- CAREER EXPLORER LOGIC -->
+  <script>
+    // --- CAREERS MASTER DATA ---
+    const CAREERS_DATA = [
+      {
+        id: "ai-engineer",
+        title: "AI Engineer",
+        icon: "🤖",
+        desc: "Builds intelligent software, neural networks, and algorithms that teach computers how to think and learn.",
+        skills: "Mathematics, Python, Machine Learning, Logic",
+        salary: "₹6,00,000 - ₹35,00,000 per year",
+        roadmap: [
+          { phase: "Class 6–8 (Foundation)", detail: "Develop a strong grip on math (fractions, statistics) and start playing with scratch logic or block coding." },
+          { phase: "Class 9–10 (Preparation)", detail: "Study coordinate geometry, linear equations, and begin learning Python programming variables and loops." },
+          { phase: "Class 11–12 (Specialization)", detail: "Opt for Science stream (PCM). Focus heavily on Probability, Calculus, Matrices, and Computer Science." },
+          { phase: "College & Beyond", detail: "Pursue a B.Tech in Computer Science or Artificial Intelligence. Work on projects involving neural networks and data models." }
+        ]
+      },
+      {
+        id: "software-eng",
+        title: "Software Engineer",
+        icon: "💻",
+        desc: "Designs and codes responsive applications, games, databases, and operating systems that solve daily real-world problems.",
+        skills: "Data Structures, Java/C++/Python, Problem Solving",
+        salary: "₹4,00,000 - ₹24,00,000 per year",
+        roadmap: [
+          { phase: "Class 6–8 (Foundation)", detail: "Explore basic computer structures, typing, and fundamental logic statements (If-Else)." },
+          { phase: "Class 9–10 (Preparation)", detail: "Study algebraic equations and algorithmic thinking. Write simple HTML pages and basic coding scripts." },
+          { phase: "Class 11–12 (Specialization)", detail: "Learn object-oriented programming (OOPs) concepts in Computer Science. Focus on math logic." },
+          { phase: "College & Beyond", detail: "Earn a degree in Computer Science (B.Tech, BCA, or B.Sc). Build projects, host websites, and practice algorithmic puzzles." }
+        ]
+      },
+      {
+        id: "data-scientist",
+        title: "Data Scientist",
+        icon: "📊",
+        desc: "Analyzes massive amounts of raw information to find secret patterns and help companies make smart decisions.",
+        skills: "Statistics, Probability, SQL, Python",
+        salary: "₹5,00,000 - ₹28,00,000 per year",
+        roadmap: [
+          { phase: "Class 6–8 (Foundation)", detail: "Master data representation: graphs, mean, median, mode, and bar charts in mathematics." },
+          { phase: "Class 9–10 (Preparation)", detail: "Study probability, statistics chapters, and spreadsheets (like MS Excel/Google Sheets)." },
+          { phase: "Class 11–12 (Specialization)", detail: "Study permutations, combinations, and probability distributions. Learn basic Python data libraries." },
+          { phase: "College & Beyond", detail: "Get a degree in Statistics, Math, or Computer Science. Learn SQL databases and data visualization tools." }
+        ]
+      },
+      {
+        id: "robotics-specialist",
+        title: "Robotics Specialist",
+        icon: "⚙️",
+        desc: "Designs, builds, and programs mechanical robots to automate factories, perform surgeries, or explore space.",
+        skills: "Physics, Electronics, Mechanics, Microcontrollers",
+        salary: "₹5,50,000 - ₹30,00,000 per year",
+        roadmap: [
+          { phase: "Class 6–8 (Foundation)", detail: "Learn simple machines (gears, pulleys, levers) and study electric currents and circuits in science." },
+          { phase: "Class 9–10 (Preparation)", detail: "Understand electromagnetism and force. Build simple DIY circuit toys or work with basic toy motors." },
+          { phase: "Class 11–12 (Specialization)", detail: "Study rotational mechanics and wave physics. Learn basic electronics (transistors, resistors, Arduino boards)." },
+          { phase: "College & Beyond", detail: "Pursue Mechanical, Electrical, or Mechatronics Engineering. Participate in robotic design contests." }
+        ]
+      },
+      {
+        id: "cloud-eng",
+        title: "Cloud Engineer",
+        icon: "☁️",
+        desc: "Manages data storage and server systems hosted on the internet, ensuring websites never crash.",
+        skills: "Networking, Linux, AWS/Azure, Cybersecurity",
+        salary: "₹5,00,000 - ₹26,00,000 per year",
+        roadmap: [
+          { phase: "Class 6–8 (Foundation)", detail: "Understand how the internet works and study basic computer networking diagrams." },
+          { phase: "Class 9–10 (Preparation)", detail: "Learn about binary systems, operating systems, and file management structures." },
+          { phase: "Class 11–12 (Specialization)", detail: "Begin exploring command-line terminals (like Linux) and learn how networks communicate." },
+          { phase: "College & Beyond", detail: "Get certified in cloud platforms (AWS, Azure) while doing a Computer Science degree." }
+        ]
+      },
+      {
+        id: "doctor",
+        title: "Medical Doctor",
+        icon: "🩺",
+        desc: "Diagnoses diseases, performs vital operations, and researches new cures to save lives and support health systems.",
+        skills: "Biology, Chemistry, Empathy, Diagnosis",
+        salary: "₹8,00,000 - ₹40,00,000 per year",
+        roadmap: [
+          { phase: "Class 6–8 (Foundation)", detail: "Study plant and animal classification, nutrient systems, and basic human body organs." },
+          { phase: "Class 9–10 (Preparation)", detail: "Focus heavily on human anatomy, biological processes, chemical compounds, and acid-base behaviors." },
+          { phase: "Class 11–12 (Specialization)", detail: "Choose PCB stream (Physics, Chemistry, Biology). Study organic chemistry and cellular biology in depth. Crack NEET exam." },
+          { phase: "College & Beyond", detail: "Complete MBBS degree (5.5 years) followed by specialization (MD/MS) in fields like cardiology or pediatrics." }
+        ]
+      },
+      {
+        id: "research-scientist",
+        title: "Research Scientist",
+        icon: "🧪",
+        desc: "Conducts breakthrough experiments to discover new elements, space phenomena, or environmental solutions.",
+        skills: "Scientific Method, Analysis, Physics/Chemistry/Bio",
+        salary: "₹5,00,000 - ₹22,00,000 per year",
+        roadmap: [
+          { phase: "Class 6–8 (Foundation)", detail: "Ask questions, conduct kitchen experiments, and read books about stars, space, and earth science." },
+          { phase: "Class 9–10 (Preparation)", detail: "Understand the scientific method. Master balancing chemical equations and physics formulas." },
+          { phase: "Class 11–12 (Specialization)", detail: "Perform rigorous practical laboratory experiments in school. Study advanced concepts in your favorite science subject." },
+          { phase: "College & Beyond", detail: "Earn a B.Sc and M.Sc, followed by a Ph.D. in a specialized research niche. Publish papers in scientific journals." }
+        ]
+      }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCareersList();
+    });
+
+    function renderCareersList() {
+      const grid = document.getElementById("careers-grid");
+      grid.innerHTML = "";
+
+      CAREERS_DATA.forEach(career => {
+        const card = document.createElement("div");
+        card.className = "subject-card glass-card";
+        card.style.cursor = "pointer";
+        card.onclick = () => showRoadmap(career.id);
+        
+        card.innerHTML = `
+          <div class="subject-header">
+            <span style="font-size: 2rem;">${career.icon}</span>
+            <span class="subject-class-tag" style="background: rgba(255,215,0,0.15); color: #B8860B;">STEM Career</span>
+          </div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 8px;">${career.title}</h3>
+          <p class="subject-description" style="font-size: 0.8rem; margin-bottom: 0;">Click to view roadmap &rarr;</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function showRoadmap(careerId) {
+      const career = CAREERS_DATA.find(c => c.id === careerId);
+      if (!career) return;
+
+      // Hide empty state and show active roadmap
+      document.getElementById("roadmap-empty-state").style.display = "none";
+      document.getElementById("roadmap-active-state").style.display = "block";
+
+      // Fill in metadata
+      document.getElementById("roadmap-career-name").innerText = `${career.icon} ${career.title}`;
+      document.getElementById("roadmap-career-desc").innerText = career.desc;
+      document.getElementById("roadmap-skills-tag").innerText = `Skills: ${career.skills}`;
+      document.getElementById("roadmap-salary-tag").innerText = `Avg Salary: ${career.salary}`;
+
+      // Build steps
+      const stepsContainer = document.getElementById("roadmap-steps-container");
+      stepsContainer.innerHTML = "";
+
+      career.roadmap.forEach((step, idx) => {
+        const stepEl = document.createElement("div");
+        stepEl.className = "roadmap-step";
+        // The first step is marked active for a nice progress visual
+        if (idx === 0) stepEl.classList.add("active");
+        
+        stepEl.innerHTML = `
+          <h4>${step.phase}</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">${step.detail}</p>
+        `;
+        stepsContainer.appendChild(stepEl);
+      });
+
+      showToast(`Roadmap unlocked for ${career.title}!`, "success");
+      
+      // Scroll to roadmap viewport on mobile
+      if (window.innerWidth < 992) {
+        document.getElementById("roadmap-display-box").scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+</html>

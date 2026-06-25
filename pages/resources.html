@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search and download free STEM study materials: notes, formulas sheets, practice questions, and video lectures for Classes 6-12 on STEM Quest.">
+  <title>STEM Resource Center – Free Study Materials & Videos</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">S</div>
+        STEM Quest
+      </a>
+      
+      <ul class="nav-links" id="nav-links-container">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="subjects.html">STEM Subjects</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="resources.html" class="active">Resources</a></li>
+        <li><a href="career.html">Career Explorer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- HUD ITEMS -->
+        <div class="hud-item xp-hud" id="nav-xp" title="Experience Points">0 XP</div>
+        <div class="hud-item coin-hud" title="STEM Coins">🪙 <span id="nav-coins">0</span></div>
+        <div class="hud-item streak-hud" title="Daily Streak">🔥 <span id="nav-streak">3 Days</span></div>
+        <div class="hud-item" id="nav-level" style="background: var(--accent); color: #1E1E1E; font-weight: 800;">Lvl 1</div>
+        
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">🌙</button>
+        <a href="dashboard.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Dashboard</a>
+        <div class="menu-toggle" id="menu-toggle-btn">☰</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN COVER -->
+  <section class="section-padding" style="background: radial-gradient(circle at 10% 20%, rgba(108,76,241,0.03) 0%, transparent 40%);">
+    <div class="container">
+      <div class="section-header text-center" style="max-width: 700px;">
+        <span style="background: var(--success-glow); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; color: var(--success);">📚 RESOURCE LIBRARY</span>
+        <h1 style="font-size: 2.75rem; margin-top: 10px; margin-bottom: 12px;">Study Resource Center</h1>
+        <p style="color: var(--text-muted);">Access free formulas sheets, simplified chapter notes, past exam papers, and video lectures. Everything is searchable and completely free!</p>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="glass-card" style="padding: 24px; margin-bottom: 40px; border-radius: var(--radius-md);">
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; align-items: center;">
+          <!-- Search Bar -->
+          <input type="text" class="form-input" id="resource-search" placeholder="🔍 Search resources (e.g. Electricity, Algebra, Circuits)..." oninput="filterResources()">
+          
+          <!-- Class Filter -->
+          <select class="form-input" id="filter-class" onchange="filterResources()">
+            <option value="all">All Classes (6-12)</option>
+            <option value="class6">Class 6</option>
+            <option value="class7">Class 7</option>
+            <option value="class8">Class 8</option>
+            <option value="class9">Class 9</option>
+            <option value="class10">Class 10</option>
+            <option value="class11">Class 11</option>
+            <option value="class12">Class 12</option>
+          </select>
+
+          <!-- Subject Filter -->
+          <select class="form-input" id="filter-subject" onchange="filterResources()">
+            <option value="all">All Subjects</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="biology">Biology</option>
+            <option value="math">Mathematics</option>
+            <option value="coding">Coding & AI</option>
+            <option value="engineering">Engineering</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Resources Catalog Grid -->
+      <div class="subject-grid" id="resources-catalog">
+        <!-- Rendered Dynamically via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 STEM Quest Platform. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="mailto:vaishnavichoudhari190@gmail.com" class="developer-credit">Vaishnavi J. Choudhari</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STATE ENGINE SCRIPT -->
+  <script src="../script.js"></script>
+
+  <!-- RESOURCE CENTER LOGIC -->
+  <script>
+    // --- RESOURCES MASTER DATA ---
+    const RESOURCES_DATA = [
+      {
+        id: "res-physics-circuits",
+        title: "Electric Circuits Cheat Sheet",
+        type: "Formulas Sheet",
+        subject: "physics",
+        classVal: "class9",
+        classLabel: "Class 9",
+        size: "1.2 MB",
+        desc: "All important electric circuit symbols, Ohm's law formulas, and series/parallel connection summaries."
+      },
+      {
+        id: "res-math-pythagoras",
+        title: "Pythagoras Theorem Notes",
+        type: "Concept Notes",
+        subject: "math",
+        classVal: "class8",
+        classLabel: "Class 8",
+        size: "2.4 MB",
+        desc: "Visual step-by-step proofs of Pythagoras theorem and practical examples solved with simple ratios."
+      },
+      {
+        id: "res-chem-neutralize",
+        title: "Acids, Bases & Neutralization Worksheets",
+        type: "Practice Sheet",
+        subject: "chemistry",
+        classVal: "class9",
+        classLabel: "Class 9",
+        size: "1.8 MB",
+        desc: "15 balancing chemical equation puzzles representing neutralization reactions (HCl + NaOH)."
+      },
+      {
+        id: "res-coding-loops",
+        title: "Python Loops & Lists Guide",
+        type: "Concept Notes",
+        subject: "coding",
+        classVal: "class9",
+        classLabel: "Class 9",
+        size: "3.1 MB",
+        desc: "Simplified coding explanations showing how 'for' and 'while' loops iterate over sequences with visuals."
+      },
+      {
+        id: "res-physics-light",
+        title: "Reflection & Refraction Practice Paper",
+        type: "Exam Paper",
+        subject: "physics",
+        classVal: "class10",
+        classLabel: "Class 10",
+        size: "1.5 MB",
+        desc: "Ten years solved previous board questions on spherical mirrors and lens magnification equations."
+      },
+      {
+        id: "res-math-algebra",
+        title: "Linear Equations Practice Questions",
+        type: "Practice Sheet",
+        subject: "math",
+        classVal: "class7",
+        classLabel: "Class 7",
+        size: "0.9 MB",
+        desc: "Fun word problems showing how algebra is used to calculate crops harvesting yields and school attendance."
+      },
+      {
+        id: "res-biology-cells",
+        title: "Plant & Animal Cells Diagrams",
+        type: "Concept Notes",
+        subject: "biology",
+        classVal: "class6",
+        classLabel: "Class 6",
+        size: "4.2 MB",
+        desc: "Colored, high-resolution labeled diagrams of cell walls, nucleus, and mitochondria structures."
+      },
+      {
+        id: "res-eng-robotics",
+        title: "DIY Robotics Projects Guide",
+        type: "STEM Guide",
+        subject: "engineering",
+        classVal: "class10",
+        classLabel: "Class 10",
+        size: "5.0 MB",
+        desc: "Step-by-step instructions to build a line-following robot using cheap local resources and motors."
+      }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderResources(RESOURCES_DATA);
+    });
+
+    function renderResources(list) {
+      const container = document.getElementById("resources-catalog");
+      container.innerHTML = "";
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 60px 0;">
+            <span style="font-size: 3rem;">🔍</span>
+            <h3 style="margin-top: 16px;">No resources match your search criteria</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Try searching for broad terms like 'circuits', 'notes', or adjust filters.</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(res => {
+        const subColors = {
+          physics: "rgba(108,76,241,0.15)",
+          chemistry: "rgba(239, 68, 68, 0.15)",
+          biology: "rgba(16, 185, 129, 0.15)",
+          math: "rgba(255, 215, 0, 0.2)",
+          coding: "rgba(59, 130, 246, 0.15)",
+          engineering: "rgba(107, 114, 128, 0.15)"
+        };
+        const badgeBg = subColors[res.subject] || "var(--primary-glow)";
+
+        const card = document.createElement("div");
+        card.className = "subject-card glass-card";
+        card.innerHTML = `
+          <div class="subject-header" style="margin-bottom: 12px;">
+            <span class="subject-class-tag" style="background: ${badgeBg}; color: var(--text-main); font-weight: 700;">${res.type}</span>
+            <span class="subject-class-tag">${res.classLabel}</span>
+          </div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">${res.title}</h3>
+          <p class="subject-description" style="font-size: 0.82rem; margin-bottom: 16px;">${res.desc}</p>
+          <div class="subject-footer">
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Size: ${res.size}</span>
+            <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.75rem; border-radius: 8px;" onclick="downloadResource('${res.title}')">Download 📥</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterResources() {
+      const searchQuery = document.getElementById("resource-search").value.toLowerCase();
+      const selectedClass = document.getElementById("filter-class").value;
+      const selectedSubject = document.getElementById("filter-subject").value;
+
+      const filtered = RESOURCES_DATA.filter(res => {
+        const matchesSearch = res.title.toLowerCase().includes(searchQuery) || 
+                              res.desc.toLowerCase().includes(searchQuery) ||
+                              res.type.toLowerCase().includes(searchQuery);
+        
+        const matchesClass = selectedClass === "all" || res.classVal === selectedClass;
+        const matchesSubject = selectedSubject === "all" || res.subject === selectedSubject;
+
+        return matchesSearch && matchesClass && matchesSubject;
+      });
+
+      renderResources(filtered);
+    }
+
+    function downloadResource(name) {
+      addXP(10); // Reward active learning
+      showToast(`Downloading "${name}"... Earned +10 XP!`, "success");
+    }
+  </script>
+</body>
+</html>

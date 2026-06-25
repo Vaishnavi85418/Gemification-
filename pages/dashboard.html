@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Access your personalized STEM Quest dashboard. Track XP, view earned badges, manage classroom quizzes, or check student performance reports.">
+  <title>STEM Quest - Profile & Portals Dashboard</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">S</div>
+        STEM Quest
+      </a>
+      
+      <ul class="nav-links" id="nav-links-container">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="subjects.html">STEM Subjects</a></li>
+        <li><a href="challenges.html">Challenges</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="career.html">Career Explorer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- HUD ITEMS -->
+        <div class="hud-item xp-hud" id="nav-xp" title="Experience Points">0 XP</div>
+        <div class="hud-item coin-hud" title="STEM Coins">🪙 <span id="nav-coins">0</span></div>
+        <div class="hud-item streak-hud" title="Daily Streak">🔥 <span id="nav-streak">3 Days</span></div>
+        <div class="hud-item" id="nav-level" style="background: var(--accent); color: #1E1E1E; font-weight: 800;">Lvl 1</div>
+        
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">🌙</button>
+        <a href="dashboard.html" class="btn btn-primary active" style="padding: 8px 20px; font-size: 0.85rem;">Dashboard</a>
+        <div class="menu-toggle" id="menu-toggle-btn">☰</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN BODY -->
+  <section class="section-padding" style="background: radial-gradient(circle at 10% 20%, rgba(108,76,241,0.03) 0%, transparent 40%);">
+    <div class="container">
+      <div class="dashboard-grid">
+        
+        <!-- SIDEBAR: PROFILE CARD -->
+        <div class="glass-card profile-card" style="align-self: start;">
+          <div class="profile-avatar" id="prof-avatar-char">V</div>
+          <h2 style="font-size: 1.5rem; margin-bottom: 4px;" id="prof-name">Vaishnavi J. Choudhari</h2>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;" id="prof-class">Class 9 &bull; Z.P. School</p>
+          
+          <div class="profile-level-badge" id="prof-level-title">STEM Beginner (Lvl 1)</div>
+
+          <div style="width: 100%; text-align: left; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px;">
+              <span>XP PROGRESS</span>
+              <span id="prof-xp-text">0 / 200 XP</span>
+            </div>
+            <div class="quiz-progress-bar" style="height: 10px;">
+              <div class="quiz-progress-fill" id="prof-xp-fill-bar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div style="display: flex; width: 100%; gap: 12px; margin-top: 10px;">
+            <div class="glass-card" style="flex: 1; padding: 12px; text-align: center; border-radius: var(--radius-sm); background: rgba(255, 215, 0, 0.05);">
+              <span style="font-size: 1.3rem;">🪙</span>
+              <div style="font-weight: 800; font-size: 1.1rem; color: #D4AF37;" id="prof-coins">0</div>
+              <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Coins</span>
+            </div>
+            <div class="glass-card" style="flex: 1; padding: 12px; text-align: center; border-radius: var(--radius-sm); background: rgba(239, 68, 68, 0.05);">
+              <span style="font-size: 1.3rem;">🔥</span>
+              <div style="font-weight: 800; font-size: 1.1rem; color: #EF4444;" id="prof-streak">3</div>
+              <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Streak</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN AREA: PORTAL TABS -->
+        <div class="dashboard-tabs-container">
+          <div class="dashboard-tabs">
+            <div class="dash-tab-btn active" id="tab-student" onclick="switchPortal('student')">🎓 Student Quest Profile</div>
+            <div class="dash-tab-btn" id="tab-teacher" onclick="switchPortal('teacher')">🏫 Teacher Portal</div>
+            <div class="dash-tab-btn" id="tab-parent" onclick="switchPortal('parent')">👪 Parent Hub</div>
+          </div>
+
+          <!-- 1. STUDENT PROFILE PANE -->
+          <div class="dash-pane active" id="pane-student">
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--primary);">My Achievement Showcase</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px;">Every time you score 100% on a quiz or solve a complex virtual experiment, you unlock high-fidelity, collectible badges.</p>
+
+            <h4 style="font-size: 1.1rem; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Badge Inventory</h4>
+            <div class="badge-grid" id="student-badge-grid">
+              <!-- Rendered Dynamically via JS -->
+            </div>
+
+            <h4 style="font-size: 1.1rem; margin-top: 40px; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">My Learning Stats</h4>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+              <div class="feature-card glass-card" style="padding: 24px; text-align: center;">
+                <div style="font-size: 2.25rem; font-weight: 800; color: var(--primary);" id="stats-quizzes-count">0</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 4px;">QUIZZES COMPLETED</div>
+              </div>
+              <div class="feature-card glass-card" style="padding: 24px; text-align: center;">
+                <div style="font-size: 2.25rem; font-weight: 800; color: var(--success);" id="stats-labs-count">0</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 4px;">VIRTUAL LABS PLAYED</div>
+              </div>
+              <div class="feature-card glass-card" style="padding: 24px; text-align: center;">
+                <div style="font-size: 2.25rem; font-weight: 800; color: #D4AF37;" id="stats-rank-num">#4</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 4px;">VILLAGE RANK</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. TEACHER DASHBOARD PANE -->
+          <div class="dash-pane" id="pane-teacher">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 style="font-size: 1.5rem; color: var(--primary);">Classroom Monitoring (Grade 9-A)</h3>
+              <a href="quiz.html" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.8rem;">+ Create Quiz</a>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px;">Track the progress of your rural student roster. Identify students needing additional STEM support instantly.</p>
+
+            <div class="glass-card" style="padding: 20px; border-radius: var(--radius-md); overflow-x: auto;">
+              <table class="leaderboard-table" style="margin-top: 0;">
+                <thead>
+                  <tr>
+                    <th>Student Name</th>
+                    <th>Attendance</th>
+                    <th>XP Points</th>
+                    <th>Quizzes Taken</th>
+                    <th>Last Active</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight: 600;">Suresh Rathod</td>
+                    <td>96%</td>
+                    <td style="color: var(--primary); font-weight: 700;">1250 XP</td>
+                    <td>4 Quizzes</td>
+                    <td>Today</td>
+                    <td><span style="background: rgba(16,185,129,0.15); color: var(--success); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">Advanced</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600;">Priya Patil</td>
+                    <td>94%</td>
+                    <td style="color: var(--primary); font-weight: 700;">1100 XP</td>
+                    <td>3 Quizzes</td>
+                    <td>Yesterday</td>
+                    <td><span style="background: rgba(16,185,129,0.15); color: var(--success); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">Advanced</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600;">Rohan Mhaskar</td>
+                    <td>88%</td>
+                    <td style="color: var(--primary); font-weight: 700;">450 XP</td>
+                    <td>2 Quizzes</td>
+                    <td>3 Days ago</td>
+                    <td><span style="background: var(--primary-glow); color: var(--primary); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 600;">Sneha Wadkar</td>
+                    <td>92%</td>
+                    <td style="color: var(--primary); font-weight: 700;">380 XP</td>
+                    <td>1 Quiz</td>
+                    <td>5 Days ago</td>
+                    <td><span style="background: var(--primary-glow); color: var(--primary); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">Active</span></td>
+                  </tr>
+                  <tr class="user-row">
+                    <td style="font-weight: 600;">Vaishnavi J. Choudhari (You)</td>
+                    <td>98%</td>
+                    <td style="color: var(--primary); font-weight: 700;" id="teacher-view-user-xp">150 XP</td>
+                    <td id="teacher-view-user-quizzes">1 Quiz</td>
+                    <td>Just Now</td>
+                    <td><span style="background: var(--primary-glow); color: var(--primary); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;" id="teacher-view-user-status">Active</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 3. PARENT DASHBOARD PANE -->
+          <div class="dash-pane" id="pane-parent">
+            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--primary);">Parent Progress Monitoring Hub</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Welcome, Parent! Review Vaishnavi's classroom attendance, weekly test performance, and sign off on home experiments.</p>
+
+            <div class="features-grid" style="grid-template-columns: 1fr 1.5fr; gap: 24px;">
+              <!-- Left: Attendance & Performance Stats -->
+              <div class="glass-card" style="padding: 24px;">
+                <h4 style="font-size: 1.1rem; margin-bottom: 16px;">School Checkpoints</h4>
+                
+                <div style="margin-bottom: 16px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">
+                    <span>Class Attendance</span>
+                    <span style="color: var(--success);">98% (Excellent)</span>
+                  </div>
+                  <div class="quiz-progress-bar" style="height: 6px;"><div class="quiz-progress-fill" style="width: 98%; background: var(--success);"></div></div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">
+                    <span>Syllabus Completion</span>
+                    <span style="color: var(--primary);">42% Completed</span>
+                  </div>
+                  <div class="quiz-progress-bar" style="height: 6px;"><div class="quiz-progress-fill" style="width: 42%;"></div></div>
+                </div>
+              </div>
+
+              <!-- Right: Parent signature validation -->
+              <div class="glass-card" style="padding: 24px; border: 2px solid var(--accent); background: rgba(255, 215, 0, 0.02);">
+                <span style="font-size: 1.5rem;">✍️</span>
+                <h4 style="margin-top: 8px; margin-bottom: 8px;">Parent Signature Challenge</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;">Did Vaishnavi explain a science experiment to you at home today? Check this box to sign off and award her an immediate **+20 XP bonus**!</p>
+                
+                <div class="challenge-item" id="parent-sig-box-container" style="padding: 12px 16px; cursor: pointer;" onclick="verifyParentSignature()">
+                  <div class="challenge-checkbox" id="parent-sig-checkbox">✓</div>
+                  <span style="font-size: 0.9rem; font-weight: 600;" id="parent-sig-label">Yes, Vaishnavi explained an experiment today!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 STEM Quest Platform. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="mailto:vaishnavichoudhari190@gmail.com" class="developer-credit">Vaishnavi J. Choudhari</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STATE ENGINE SCRIPT -->
+  <script src="../script.js"></script>
+
+  <!-- DASHBOARD CONTROLLER -->
+  <script>
+    // Badges definitions
+    const MASTER_BADGES = [
+      { id: "Science Explorer", icon: "🔬", desc: "For exploring subject categories." },
+      { id: "Circuit Builder", icon: "⚡", desc: "For building a virtual electric circuit." },
+      { id: "Gravity Master", icon: "🪐", desc: "For running gravitational orbit simulations." },
+      { id: "Chem Alchemist", icon: "🧪", desc: "For neutralizing acids and bases successfully." },
+      { id: "Circuit Specialist", icon: "💡", desc: "Score 100% in Physics Circuit Quiz." },
+      { id: "Math Master", icon: "📐", desc: "Score 100% in Pythagoras Math Quiz." },
+      { id: "Coding Beginner", icon: "💻", desc: "Score 100% in Python Coding Quiz." }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check role switcher from URL
+      const params = new URLSearchParams(window.location.search);
+      const roleParam = params.get('role');
+      if (roleParam && ["student", "teacher", "parent"].includes(roleParam)) {
+        switchPortal(roleParam);
+      } else {
+        renderDashboardData();
+      }
+
+      // Re-render when global state updates
+      window.addEventListener("statechange", () => {
+        renderDashboardData();
+      });
+    });
+
+    function switchPortal(portalName) {
+      // Toggle Tab styles
+      document.getElementById("tab-student").classList.remove("active");
+      document.getElementById("tab-teacher").classList.remove("active");
+      document.getElementById("tab-parent").classList.remove("active");
+      document.getElementById(`tab-${portalName}`).classList.add("active");
+
+      // Toggle display panes
+      document.getElementById("pane-student").style.display = portalName === "student" ? "block" : "none";
+      document.getElementById("pane-teacher").style.display = portalName === "teacher" ? "block" : "none";
+      document.getElementById("pane-parent").style.display = portalName === "parent" ? "block" : "none";
+
+      showToast(`Logged into ${portalName.toUpperCase()} View`, "info");
+      renderDashboardData();
+    }
+
+    function renderDashboardData() {
+      const state = getState();
+
+      // 1. Sidebar Profile Card updates
+      document.getElementById("prof-name").innerText = state.user.name;
+      document.getElementById("prof-class").innerText = `${state.user.class} • Z.P. School`;
+      document.getElementById("prof-coins").innerText = state.user.coins;
+      document.getElementById("prof-streak").innerText = state.user.streak;
+      document.getElementById("prof-avatar-char").innerText = state.user.name.charAt(0);
+
+      // Level Titles mapping
+      const titles = {
+        1: "STEM Beginner",
+        2: "STEM Explorer",
+        3: "STEM Innovator",
+        4: "STEM Scientist",
+        5: "STEM Hero"
+      };
+      const levelTitle = titles[state.user.level] || "STEM Champion";
+      document.getElementById("prof-level-title").innerText = `${levelTitle} (Lvl ${state.user.level})`;
+
+      // Calculate XP percentage
+      // Formula: Level N requires N * 200 XP.
+      // E.g. Lvl 1 needs 200 XP to Lvl 2. Lvl 2 needs 400 XP.
+      let currentLevel = state.user.level;
+      let cumulativeXp = 0;
+      for (let i = 1; i < currentLevel; i++) {
+        cumulativeXp += i * 200;
+      }
+      
+      const xpInCurrentLevel = state.user.xp - cumulativeXp;
+      const xpNeededForNextLevel = currentLevel * 200;
+      const percentage = Math.min((xpInCurrentLevel / xpNeededForNextLevel) * 100, 100);
+
+      document.getElementById("prof-xp-text").innerText = `${xpInCurrentLevel} / ${xpNeededForNextLevel} XP`;
+      document.getElementById("prof-xp-fill-bar").style.width = `${percentage}%`;
+
+      // 2. Student Tab: Render Badges Showcase
+      const badgeGrid = document.getElementById("student-badge-grid");
+      badgeGrid.innerHTML = "";
+
+      MASTER_BADGES.forEach(badge => {
+        const isUnlocked = state.user.badges.includes(badge.id);
+        const card = document.createElement("div");
+        card.className = `badge-card glass-card ${isUnlocked ? 'unlocked' : ''}`;
+        card.innerHTML = `
+          <div class="badge-icon-wrap">${badge.icon}</div>
+          <div class="badge-name">${badge.id}</div>
+          <div class="badge-desc">${badge.desc}</div>
+        `;
+        badgeGrid.appendChild(card);
+      });
+
+      // Student statistics
+      const quizzesCount = Object.keys(state.completedQuizzes).length;
+      document.getElementById("stats-quizzes-count").innerText = quizzesCount;
+
+      // Virtual labs solved count
+      let labsCount = 0;
+      if (state.user.badges.includes("Circuit Builder")) labsCount++;
+      if (state.user.badges.includes("Gravity Master")) labsCount++;
+      if (state.user.badges.includes("Chem Alchemist")) labsCount++;
+      document.getElementById("stats-labs-count").innerText = labsCount;
+
+      // Calculate rank dynamically based on state leaderboard array
+      const sortedLeaderboard = [...state.leaderboard].sort((a,b) => b.xp - a.xp);
+      const userRank = sortedLeaderboard.findIndex(e => e.name === state.user.name) + 1;
+      document.getElementById("stats-rank-num").innerText = `#${userRank || 4}`;
+
+      // 3. Teacher Tab updates
+      document.getElementById("teacher-view-user-xp").innerText = `${state.user.xp} XP`;
+      document.getElementById("teacher-view-user-quizzes").innerText = `${quizzesCount} Quiz${quizzesCount === 1 ? '' : 'zes'}`;
+      
+      const teacherStatus = document.getElementById("teacher-view-user-status");
+      if (state.user.level >= 4) {
+        teacherStatus.className = "rank-badge rank-1"; // Golden/Advanced
+        teacherStatus.style.padding = "4px 10px";
+        teacherStatus.style.borderRadius = "12px";
+        teacherStatus.style.fontSize = "0.75rem";
+        teacherStatus.innerText = "Advanced";
+      } else {
+        teacherStatus.className = "rank-badge";
+        teacherStatus.style.background = "var(--primary-glow)";
+        teacherStatus.style.color = "var(--primary)";
+        teacherStatus.style.padding = "4px 10px";
+        teacherStatus.style.borderRadius = "12px";
+        teacherStatus.style.fontSize = "0.75rem";
+        teacherStatus.innerText = "Active";
+      }
+
+      // 4. Parent Tab updates
+      const parentCheckbox = document.getElementById("parent-sig-checkbox");
+      const parentSigContainer = document.getElementById("parent-sig-box-container");
+      const isSigChecked = state.completedChallenges.includes("parent-signature");
+
+      if (isSigChecked) {
+        parentSigContainer.classList.add("completed");
+        parentCheckbox.style.borderColor = "var(--success)";
+        parentCheckbox.style.background = "var(--success)";
+        parentCheckbox.style.color = "white";
+        document.getElementById("parent-sig-label").innerHTML = "<span style='color: var(--success);'>Verified! Vaishnavi earned +20 XP!</span>";
+        parentSigContainer.onclick = null; // Disable clicking again
+      } else {
+        parentSigContainer.classList.remove("completed");
+        parentCheckbox.style.borderColor = "var(--border-color)";
+        parentCheckbox.style.background = "transparent";
+        parentCheckbox.style.color = "transparent";
+        document.getElementById("parent-sig-label").innerText = "Yes, Vaishnavi explained an experiment today!";
+        parentSigContainer.onclick = verifyParentSignature;
+      }
+    }
+
+    function verifyParentSignature() {
+      const state = getState();
+      if (!state.completedChallenges.includes("parent-signature")) {
+        state.completedChallenges.push("parent-signature");
+        saveState(state);
+        
+        // Award XP
+        addXP(20);
+        showToast("Parent Signature verified! Vaishnavi rewarded +20 XP!", "success");
+        renderDashboardData();
+      }
+    }
+  </script>
+</body>
+</html>

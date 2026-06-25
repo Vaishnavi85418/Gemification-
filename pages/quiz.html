@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Test your STEM knowledge with interactive quizzes. Earn XP, STEM coins, and unlock exclusive achievement badges on STEM Quest.">
+  <title>STEM Quest - Interactive Quizzes & Quiz Creator</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">S</div>
+        STEM Quest
+      </a>
+      
+      <ul class="nav-links" id="nav-links-container">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="subjects.html">STEM Subjects</a></li>
+        <li><a href="quiz.html" class="active">Challenges</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="career.html">Career Explorer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- HUD ITEMS -->
+        <div class="hud-item xp-hud" id="nav-xp" title="Experience Points">0 XP</div>
+        <div class="hud-item coin-hud" title="STEM Coins">🪙 <span id="nav-coins">0</span></div>
+        <div class="hud-item streak-hud" title="Daily Streak">🔥 <span id="nav-streak">3 Days</span></div>
+        <div class="hud-item" id="nav-level" style="background: var(--accent); color: #1E1E1E; font-weight: 800;">Lvl 1</div>
+        
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">🌙</button>
+        <a href="dashboard.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Dashboard</a>
+        <div class="menu-toggle" id="menu-toggle-btn">☰</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN SECTION -->
+  <section class="section-padding">
+    <div class="container">
+      <!-- Outer grid splitting Quiz Player and Quiz Creator -->
+      <div class="quiz-layout">
+        
+        <!-- LEFT: QUIZ SCREEN -->
+        <div class="glass-card quiz-container-box" id="quiz-player-screen">
+          <!-- Quiz Selector View -->
+          <div id="quiz-selector-view">
+            <h2 style="font-size: 2.25rem; margin-bottom: 12px; color: var(--primary);">Choose Your STEM Quiz Quest</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Select a subject below to test your concepts. Score 100% to earn the ultimate subject badge!</p>
+            
+            <div id="quiz-list-grid" class="subject-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+              <!-- Rendered Dynamically via JS -->
+            </div>
+          </div>
+
+          <!-- Quiz Active View -->
+          <div id="quiz-active-view" style="display: none;">
+            <div class="quiz-progress-wrapper">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; font-weight: 600;">
+                <span id="quiz-question-counter">Question 1 of 5</span>
+                <span id="quiz-timer" style="color: var(--danger);">⏱️ 30s</span>
+              </div>
+              <div class="quiz-progress-bar">
+                <div class="quiz-progress-fill" id="quiz-progress-fill-bar"></div>
+              </div>
+            </div>
+
+            <div class="quiz-question-box">
+              <h3 id="quiz-question-text">Loading question...</h3>
+              <div class="quiz-options-list" id="quiz-options-container">
+                <!-- Rendered Dynamically via JS -->
+              </div>
+              <div class="quiz-explanation" id="quiz-explanation-box">
+                <strong>Concept Explanation:</strong>
+                <p id="quiz-explanation-text">Explanation text here...</p>
+              </div>
+            </div>
+
+            <button class="btn btn-primary quiz-control-btn" id="quiz-next-btn" onclick="nextQuestion()" style="display: none;">Next Question ➡️</button>
+          </div>
+
+          <!-- Quiz Score Card View -->
+          <div id="quiz-score-view" style="display: none;" class="score-card">
+            <h1 style="font-size: 2.5rem; color: var(--primary);">Quest Completed! 🎉</h1>
+            <p style="color: var(--text-muted); margin-top: 10px;">Fantastic effort! Here are your results:</p>
+            <div class="score-value" id="score-text-val">4 / 5</div>
+            
+            <div class="reward-grid">
+              <div class="reward-item">
+                <span style="font-size: 1.8rem;">⚡</span>
+                <span id="reward-xp-val" style="font-weight: 800; color: var(--primary);">+50 XP</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Exp Points</span>
+              </div>
+              <div class="reward-item">
+                <span style="font-size: 1.8rem;">🪙</span>
+                <span id="reward-coins-val" style="font-weight: 800; color: #D4AF37;">+10 Coins</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">STEM Coins</span>
+              </div>
+            </div>
+
+            <div id="badge-unlock-section" style="margin-top: 20px; display: none;">
+              <h4 style="color: var(--success); margin-bottom: 10px;">🏆 NEW BADGE UNLOCKED!</h4>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);" id="unlocked-badge-name">Math Master</div>
+            </div>
+
+            <div style="margin-top: 40px; display: flex; justify-content: center; gap: 16px;">
+              <button class="btn btn-primary" onclick="exitQuiz()">Back to Quizzes</button>
+              <button class="btn btn-secondary" onclick="restartQuiz()">Retry Quiz</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: TEACHER QUIZ CREATOR -->
+        <div class="glass-card creator-container">
+          <span style="background: rgba(108,76,241,0.1); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.75rem;">🏫 TEACHER'S PANEL</span>
+          <h3 style="margin-top: 12px; margin-bottom: 8px; font-size: 1.5rem;">Quiz Creator</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">Create custom quizzes for your rural classroom. Custom quizzes immediately appear in the student's catalog!</p>
+
+          <form id="quiz-creator-form" onsubmit="saveCustomQuiz(event)">
+            <div class="form-group">
+              <label for="creator-subject">Select Subject:</label>
+              <select class="form-input" id="creator-subject" required>
+                <option value="physics">Physics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="biology">Biology</option>
+                <option value="math">Mathematics</option>
+                <option value="coding">Basic Coding</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="creator-title">Quiz Title:</label>
+              <input type="text" class="form-input" id="creator-title" placeholder="e.g., Solar System Trivia" required>
+            </div>
+
+            <div class="form-group" style="border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+              <h4 style="margin-bottom: 12px; font-size: 1rem;">Question Details</h4>
+              <label for="creator-q-text">Question Text:</label>
+              <textarea class="form-input" id="creator-q-text" rows="2" placeholder="Enter your question here..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Answer Options:</label>
+              <input type="text" class="form-input" id="creator-opt-a" placeholder="Option A" required style="margin-bottom: 8px;">
+              <input type="text" class="form-input" id="creator-opt-b" placeholder="Option B" required style="margin-bottom: 8px;">
+              <input type="text" class="form-input" id="creator-opt-c" placeholder="Option C" required style="margin-bottom: 8px;">
+              <input type="text" class="form-input" id="creator-opt-d" placeholder="Option D" required>
+            </div>
+
+            <div class="form-group">
+              <label for="creator-correct">Correct Option:</label>
+              <select class="form-input" id="creator-correct" required>
+                <option value="0">Option A</option>
+                <option value="1">Option B</option>
+                <option value="2">Option C</option>
+                <option value="3">Option D</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="creator-explanation">Concept Explanation:</label>
+              <textarea class="form-input" id="creator-explanation" rows="2" placeholder="Explain the concept for immediate feedback..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Publish Quiz 🚀</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 STEM Quest Platform. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="mailto:vaishnavichoudhari190@gmail.com" class="developer-credit">Vaishnavi J. Choudhari</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STATE ENGINE SCRIPT -->
+  <script src="../script.js"></script>
+
+  <!-- QUIZ ENGINE LOGIC -->
+  <script>
+    // --- DEFAULT QUIZ DATA ---
+    const DEFAULT_QUIZZES = [
+      {
+        id: "physics-circuits",
+        subject: "physics",
+        title: "Electric Circuits Basics",
+        badge: "Circuit Specialist",
+        questions: [
+          {
+            question: "Which of the following components is used to open or close an electric circuit?",
+            options: ["Battery", "Switch", "Wire", "Bulb"],
+            correct: 1,
+            explanation: "A switch is a simple device that breaks or completes the circuit path, stopping or allowing current to flow."
+          },
+          {
+            question: "What unit is used to measure electric current?",
+            options: ["Volt", "Watt", "Ampere", "Ohm"],
+            correct: 2,
+            explanation: "Electric current is measured in Amperes (amps). Volts measure electrical pressure, and Ohms measure resistance."
+          },
+          {
+            question: "Materials that allow electricity to pass through them easily are called what?",
+            options: ["Insulators", "Conductors", "Semi-conductors", "Resistors"],
+            correct: 1,
+            explanation: "Conductors (like copper and iron) have free electrons that allow electric current to flow through them easily."
+          }
+        ]
+      },
+      {
+        id: "chemistry-ph",
+        subject: "chemistry",
+        title: "Acids, Bases & pH",
+        badge: "Chem Alchemist",
+        questions: [
+          {
+            question: "What pH value represents a neutral solution, like pure water?",
+            options: ["pH 1", "pH 7", "pH 14", "pH 5"],
+            correct: 1,
+            explanation: "A pH of 7 is perfectly neutral. Values below 7 are acidic, and values above 7 are basic (alkaline)."
+          },
+          {
+            question: "What is the product of a neutralization reaction between an acid and a base?",
+            options: ["Salt and Water", "Hydrogen Gas", "Oxygen Gas", "Acidic crystals"],
+            correct: 0,
+            explanation: "Neutralization occurs when H+ ions from acid and OH- ions from base combine to form neutral H2O (water) and a salt (like NaCl)."
+          }
+        ]
+      },
+      {
+        id: "math-geometry",
+        subject: "math",
+        title: "Pythagoras Theorem",
+        badge: "Math Master",
+        questions: [
+          {
+            question: "In a right-angled triangle, what is the side opposite to the right angle called?",
+            options: ["Base", "Perpendicular", "Hypotenuse", "Adjacent"],
+            correct: 2,
+            explanation: "The hypotenuse is the longest side of a right-angled triangle, and it is always opposite to the 90-degree angle."
+          },
+          {
+            question: "If a right triangle has sides of length 3cm and 4cm, what is the length of the hypotenuse?",
+            options: ["5 cm", "7 cm", "12 cm", "25 cm"],
+            correct: 0,
+            explanation: "According to Pythagoras Theorem (a² + b² = c²): 3² + 4² = 9 + 16 = 25. The square root of 25 is 5."
+          }
+        ]
+      },
+      {
+        id: "coding-python",
+        subject: "coding",
+        title: "Python Variables & Loops",
+        badge: "Coding Beginner",
+        questions: [
+          {
+            question: "Which keyword is used to repeat a block of code a specific number of times in Python?",
+            options: ["if", "for", "def", "var"],
+            correct: 1,
+            explanation: "A 'for' loop is used to iterate over a sequence (list, range, tuple, etc.) and run a code block repeatedly."
+          },
+          {
+            question: "What will be the output of print(5 + 2 * 3) in Python?",
+            options: ["21", "11", "10", "15"],
+            correct: 1,
+            explanation: "Python follows BODMAS mathematical operator precedence. Multiplication (2 * 3 = 6) happens first, followed by addition (5 + 6 = 11)."
+          }
+        ]
+      }
+    ];
+
+    // --- STATE ENGINE DECLARATIONS ---
+    let activeQuiz = null;
+    let currentQuestionIdx = 0;
+    let score = 0;
+    let timerInterval = null;
+    let timeLeft = 30;
+
+    // Load and display quizzes on page load
+    document.addEventListener("DOMContentLoaded", () => {
+      renderQuizCatalog();
+      
+      // Auto-select subject from URL if present
+      const params = new URLSearchParams(window.location.search);
+      const sub = params.get('sub');
+      if (sub) {
+        showToast(`Quizzes filtered by ${sub.toUpperCase()}`, "info");
+      }
+    });
+
+    function renderQuizCatalog() {
+      const container = document.getElementById("quiz-list-grid");
+      container.innerHTML = "";
+
+      const state = getState();
+      // Combine defaults with custom quizzes in local storage
+      const allQuizzes = [...DEFAULT_QUIZZES, ...state.customQuizzes];
+
+      allQuizzes.forEach(quiz => {
+        const subIcons = { physics: "⚡", chemistry: "🧪", biology: "🌱", math: "📐", coding: "💻" };
+        const icon = subIcons[quiz.subject] || "📚";
+        
+        const card = document.createElement("div");
+        card.className = "subject-card glass-card";
+        card.innerHTML = `
+          <div class="subject-header">
+            <span style="font-size: 1.8rem;">${icon}</span>
+            <span class="subject-class-tag">${quiz.subject.toUpperCase()}</span>
+          </div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">${quiz.title}</h3>
+          <p class="subject-description" style="font-size: 0.8rem; margin-bottom: 16px;">${quiz.questions.length} Questions</p>
+          <div class="subject-footer">
+            <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.75rem;" onclick="startQuiz('${quiz.id}')">Start Quest</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- QUIZ PLAYER ENGINE ---
+    function startQuiz(quizId) {
+      const state = getState();
+      const allQuizzes = [...DEFAULT_QUIZZES, ...state.customQuizzes];
+      activeQuiz = allQuizzes.find(q => q.id === quizId);
+
+      if (!activeQuiz) return;
+
+      currentQuestionIdx = 0;
+      score = 0;
+
+      document.getElementById("quiz-selector-view").style.display = "none";
+      document.getElementById("quiz-active-view").style.display = "block";
+      document.getElementById("quiz-score-view").style.display = "none";
+
+      showQuestion();
+    }
+
+    function showQuestion() {
+      timeLeft = 30;
+      document.getElementById("quiz-timer").innerText = `⏱️ ${timeLeft}s`;
+      document.getElementById("quiz-timer").style.color = "var(--text-muted)";
+
+      // Reset DOM
+      document.getElementById("quiz-next-btn").style.display = "none";
+      document.getElementById("quiz-explanation-box").style.display = "none";
+
+      const question = activeQuiz.questions[currentQuestionIdx];
+      
+      // Update Counter
+      document.getElementById("quiz-question-counter").innerText = `Question ${currentQuestionIdx + 1} of ${activeQuiz.questions.length}`;
+      
+      // Progress Bar Fill
+      const percent = ((currentQuestionIdx) / activeQuiz.questions.length) * 100;
+      document.getElementById("quiz-progress-fill-bar").style.width = `${percent}%`;
+
+      // Question Text
+      document.getElementById("quiz-question-text").innerText = question.question;
+
+      // Options
+      const optionsContainer = document.getElementById("quiz-options-container");
+      optionsContainer.innerHTML = "";
+
+      question.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-option-btn glass-card";
+        btn.innerHTML = `<span>${opt}</span>`;
+        btn.onclick = () => selectOption(idx);
+        optionsContainer.appendChild(btn);
+      });
+
+      // Start Timer
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("quiz-timer").innerText = `⏱️ ${timeLeft}s`;
+        if (timeLeft <= 10) {
+          document.getElementById("quiz-timer").style.color = "var(--danger)";
+        }
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          selectOption(-1); // Timeout
+        }
+      }, 1000);
+    }
+
+    function selectOption(selectedIdx) {
+      clearInterval(timerInterval);
+      const question = activeQuiz.questions[currentQuestionIdx];
+      const optionsContainer = document.getElementById("quiz-options-container");
+      const buttons = optionsContainer.getElementsByTagName("button");
+
+      // Disable all buttons
+      for (let btn of buttons) {
+        btn.disabled = true;
+      }
+
+      // If correct answer
+      if (selectedIdx === question.correct) {
+        buttons[selectedIdx].classList.add("correct");
+        score++;
+        showToast("Correct Answer! +10 XP", "success");
+      } else {
+        // Incorrect answer
+        if (selectedIdx !== -1) {
+          buttons[selectedIdx].classList.add("incorrect");
+        }
+        // Highlight correct answer in green
+        buttons[question.correct].classList.add("correct");
+        showToast("Incorrect answer. Let's review the concept!", "warning");
+      }
+
+      // Show concept explanation
+      document.getElementById("quiz-explanation-text").innerText = question.explanation;
+      document.getElementById("quiz-explanation-box").style.display = "block";
+      
+      // Show Next button
+      document.getElementById("quiz-next-btn").style.display = "inline-flex";
+    }
+
+    function nextQuestion() {
+      currentQuestionIdx++;
+      if (currentQuestionIdx < activeQuiz.questions.length) {
+        showQuestion();
+      } else {
+        showScoreCard();
+      }
+    }
+
+    function showScoreCard() {
+      document.getElementById("quiz-active-view").style.display = "none";
+      document.getElementById("quiz-score-view").style.display = "block";
+      
+      document.getElementById("score-text-val").innerText = `${score} / ${activeQuiz.questions.length}`;
+
+      // Calculate XP and Coins rewards
+      // +20 XP for completing + 20 XP per correct answer.
+      const xpEarned = 20 + (score * 20);
+      const coinsEarned = score * 5;
+
+      document.getElementById("reward-xp-val").innerText = `+${xpEarned} XP`;
+      document.getElementById("reward-coins-val").innerText = `+${coinsEarned} Coins`;
+
+      // Apply rewards to state
+      addXP(xpEarned);
+      addCoins(coinsEarned);
+
+      // Save quiz score history in local storage
+      const state = getState();
+      const currentHighscore = state.completedQuizzes[activeQuiz.id] || 0;
+      if (score > currentHighscore) {
+        state.completedQuizzes[activeQuiz.id] = score;
+        saveState(state);
+      }
+
+      // Check if perfect score and unlock badge
+      const badgeUnlockSection = document.getElementById("badge-unlock-section");
+      if (score === activeQuiz.questions.length && activeQuiz.badge) {
+        unlockBadge(activeQuiz.badge);
+        document.getElementById("unlocked-badge-name").innerText = activeQuiz.badge;
+        badgeUnlockSection.style.display = "block";
+      } else {
+        badgeUnlockSection.style.display = "none";
+      }
+    }
+
+    function restartQuiz() {
+      startQuiz(activeQuiz.id);
+    }
+
+    function exitQuiz() {
+      clearInterval(timerInterval);
+      activeQuiz = null;
+      document.getElementById("quiz-selector-view").style.display = "block";
+      document.getElementById("quiz-active-view").style.display = "none";
+      document.getElementById("quiz-score-view").style.display = "none";
+      renderQuizCatalog();
+    }
+
+    // --- TEACHER QUIZ CREATOR ENGINE ---
+    function saveCustomQuiz(event) {
+      event.preventDefault();
+      
+      const subject = document.getElementById("creator-subject").value;
+      const title = document.getElementById("creator-title").value;
+      
+      const qText = document.getElementById("creator-q-text").value;
+      const optA = document.getElementById("creator-opt-a").value;
+      const optB = document.getElementById("creator-opt-b").value;
+      const optC = document.getElementById("creator-opt-c").value;
+      const optD = document.getElementById("creator-opt-d").value;
+      const correct = parseInt(document.getElementById("creator-correct").value);
+      const explanation = document.getElementById("creator-explanation").value;
+
+      // Construct Quiz structure
+      const newQuiz = {
+        id: `custom-${Date.now()}`,
+        subject: subject,
+        title: title,
+        badge: `${title.split(' ')[0]} Master`, // Auto badge name
+        questions: [
+          {
+            question: qText,
+            options: [optA, optB, optC, optD],
+            correct: correct,
+            explanation: explanation
+          }
+        ]
+      };
+
+      const state = getState();
+      state.customQuizzes.push(newQuiz);
+      saveState(state);
+
+      showToast(`Quiz "${title}" published successfully!`, "success");
+      document.getElementById("quiz-creator-form").reset();
+      
+      // Refresh list
+      renderQuizCatalog();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="STEM Quest - An interactive, gamified STEM learning platform for rural students. Earn XP, collect coins, unlock badges, and master Science, Tech, Engineering, and Math!">
+  <title>STEM Quest – Gamified STEM Learning for Classes 6-12</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">S</div>
+        STEM Quest
+      </a>
+      
+      <ul class="nav-links" id="nav-links-container">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="pages/subjects.html">STEM Subjects</a></li>
+        <li><a href="pages/challenges.html">Challenges</a></li>
+        <li><a href="pages/leaderboard.html">Leaderboard</a></li>
+        <li><a href="pages/resources.html">Resources</a></li>
+        <li><a href="pages/career.html">Career Explorer</a></li>
+        <li><a href="pages/contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <!-- HUD ITEMS -->
+        <div class="hud-item xp-hud" id="nav-xp" title="Experience Points">0 XP</div>
+        <div class="hud-item coin-hud" title="STEM Coins">🪙 <span id="nav-coins">0</span></div>
+        <div class="hud-item streak-hud" title="Daily Streak">🔥 <span id="nav-streak">3 Days</span></div>
+        <div class="hud-item" id="nav-level" style="background: var(--accent); color: #1E1E1E; font-weight: 800;">Lvl 1</div>
+        
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Dark/Light Theme">🌙</button>
+        <a href="pages/dashboard.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Dashboard</a>
+        <div class="menu-toggle" id="menu-toggle-btn">☰</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section section-padding">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1 class="hero-title">Learn STEM Through <span>Games, Challenges & Adventures</span></h1>
+        <p class="hero-subtitle">Making Science, Technology, Engineering, and Mathematics fun, relatable, and anxiety-free for every rural student across India.</p>
+        <div class="hero-buttons">
+          <a href="pages/subjects.html" class="btn btn-primary">Start Adventure 🚀</a>
+          <a href="pages/challenges.html" class="btn btn-secondary">Daily Quests 🏆</a>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <!-- Floating game shapes and graphics using inline SVGs to guarantee they render instantly -->
+        <svg class="floating-mesh" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="8" fill="var(--primary)" opacity="0.1" />
+          <polygon points="80,10 90,30 70,30" fill="var(--accent)" opacity="0.15" />
+          <rect x="10" y="70" width="15" height="15" rx="3" fill="var(--success)" opacity="0.1" />
+        </svg>
+        <div class="hero-img-wrapper">
+          <!-- Premium educational illustration designed in vector SVG -->
+          <svg width="380" height="380" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background glow -->
+            <circle cx="200" cy="200" r="150" fill="url(#paint0_radial)" />
+            <!-- Laptop screen representing learning -->
+            <rect x="80" y="140" width="240" height="160" rx="10" fill="#2E2A47" stroke="#6C4CF1" stroke-width="6" />
+            <rect x="95" y="155" width="210" height="110" rx="4" fill="#1A1923" />
+            <rect x="70" y="294" width="260" height="16" rx="8" fill="#5235D1" />
+            <rect x="170" y="298" width="60" height="8" rx="4" fill="#FFFFFF" opacity="0.3" />
+            <!-- Floating icons inside screen: science and math -->
+            <circle cx="160" cy="210" r="20" fill="var(--primary)" opacity="0.2" />
+            <path d="M152 210H168M160 202V218" stroke="var(--primary)" stroke-width="3" stroke-linecap="round"/>
+            
+            <circle cx="240" cy="210" r="20" fill="var(--accent)" opacity="0.2" />
+            <path d="M232 205L248 215M248 205L232 215" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+            
+            <!-- Rocket popping out representing high achievements -->
+            <path d="M200 70C210 90 220 120 215 150H185C180 120 190 90 200 70Z" fill="#FFD700" stroke="#FF8C00" stroke-width="4" />
+            <path d="M185 150L175 170H185L190 150" fill="#EF4444" />
+            <path d="M215 150L225 170H215L210 150" fill="#EF4444" />
+            <circle cx="200" cy="110" r="8" fill="#1A1923" />
+            <!-- Flame -->
+            <path d="M195 170C195 170 200 190 200 185C200 190 205 170 205 170H195Z" fill="#FF4500" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features-section section-padding">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Features Designed for Your Success</h2>
+        <p>Learning STEM is no longer scary. Dive into an immersive learning experience with games, badges, and real-life career pathways.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-card">
+          <div class="feature-icon">🔴</div>
+          <h3>Live Learning Sessions</h3>
+          <p>Interactive, visually rich explanations of complex STEM principles taught by inspiring educators.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="feature-card glass-card">
+          <div class="feature-icon">📝</div>
+          <h3>1000+ Interactive Quizzes</h3>
+          <p>Earn XP, unlock milestone badges, and climb the leaderboards by solving micro-quizzes.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="feature-card glass-card">
+          <div class="feature-icon">🤖</div>
+          <h3>24×7 AI Doubt Support</h3>
+          <p>Instantly clarify questions with our student-friendly AI assistant simulation tailored for Class 6-12 subjects.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="feature-card glass-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Gamified Challenges</h3>
+          <p>Complete daily missions, maintain your learning streak, and redeem coins for exciting profile badges.</p>
+        </div>
+        <!-- Feature 5 -->
+        <div class="feature-card glass-card">
+          <div class="feature-icon">🛠️</div>
+          <h3>STEM Projects</h3>
+          <p>Hands-on project guides using affordable, local rural resources to build science toys and electronics.</p>
+        </div>
+        <!-- Feature 6 -->
+        <div class="feature-card glass-card">
+          <div class="feature-icon">🗺️</div>
+          <h3>Career Guidance</h3>
+          <p>Clear, step-by-step career roadmaps showing you how to become an AI Engineer, Doctor, or Scientist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBJECT CATEGORIES -->
+  <section class="subjects-section section-padding">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Explore STEM Worlds</h2>
+        <p>Select a subject to begin your learning quest. Every topic matches your school board syllabus but feels like an adventure game!</p>
+      </div>
+
+      <div class="subject-grid">
+        <!-- Science -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <div class="subject-icon">🔬</div>
+            <span class="subject-class-tag">Class 6-12</span>
+          </div>
+          <h3>Science</h3>
+          <p class="subject-description">Master Physics, Chemistry, and Biology through interactive models and experiments.</p>
+          <ul class="subject-topics">
+            <li>Light & Electricity</li>
+            <li>Chemical Reactions</li>
+            <li>Cell Structures</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="pages/subjects.html?sub=science" class="subject-link">Enter World →</a>
+          </div>
+        </div>
+
+        <!-- Mathematics -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <div class="subject-icon">📐</div>
+            <span class="subject-class-tag">Class 6-12</span>
+          </div>
+          <h3>Mathematics</h3>
+          <p class="subject-description">Banish math anxiety with visualizations of Algebra, Geometry, and Trigonometry.</p>
+          <ul class="subject-topics">
+            <li>Equations</li>
+            <li>Triangles</li>
+            <li>Data Handling</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="pages/subjects.html?sub=math" class="subject-link">Enter World →</a>
+          </div>
+        </div>
+
+        <!-- Technology -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <div class="subject-icon">💻</div>
+            <span class="subject-class-tag">Class 8-12</span>
+          </div>
+          <h3>Technology</h3>
+          <p class="subject-description">Learn basic computer logic, Python programming, and Artificial Intelligence basics.</p>
+          <ul class="subject-topics">
+            <li>Coding Basics</li>
+            <li>Python Variables</li>
+            <li>AI Neural Networks</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="pages/subjects.html?sub=technology" class="subject-link">Enter World →</a>
+          </div>
+        </div>
+
+        <!-- Engineering -->
+        <div class="subject-card glass-card">
+          <div class="subject-header">
+            <div class="subject-icon">⚙️</div>
+            <span class="subject-class-tag">Class 7-12</span>
+          </div>
+          <h3>Engineering</h3>
+          <p class="subject-description">Discover the science of Robotics, Electronics, and designing everyday innovations.</p>
+          <ul class="subject-topics">
+            <li>Electric Circuits</li>
+            <li>Sensors & Motors</li>
+            <li>Design Thinking</li>
+          </ul>
+          <div class="subject-footer">
+            <a href="pages/subjects.html?sub=engineering" class="subject-link">Enter World →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICS SECTION -->
+  <section class="stats-section section-padding">
+    <div class="container stats-grid">
+      <div class="stat-card">
+        <div class="stat-num" id="stat-students">12,450+</div>
+        <div class="stat-title">Active Students Registered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-lessons">48,200+</div>
+        <div class="stat-title">Lessons & Quizzes Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-challenges">85,900+</div>
+        <div class="stat-title">Daily Challenges Solved</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-badges">18,500+</div>
+        <div class="stat-title">STEM Milestone Badges Earned</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS STORIES -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Inspiring Success Stories</h2>
+        <p>Read how rural students transformed their fear of STEM into a passion for innovation and engineering.</p>
+      </div>
+
+      <div class="testimonial-carousel">
+        <!-- Story 1 -->
+        <div class="testimonial-card glass-card">
+          <p class="testimonial-text">"I used to be terrified of math equations. The visual challenges on STEM Quest showed me how algebra is just like a puzzle. Now, I scored 92% in my class exams!"</p>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Rahul Gavit</span>
+            <span class="testimonial-village">Jawhar Village, Maharashtra</span>
+          </div>
+        </div>
+        <!-- Story 2 -->
+        <div class="testimonial-card glass-card">
+          <p class="testimonial-text">"Our school didn't have a science laboratory. With the Interactive STEM Lab here, I built virtual circuits and simulated chemistry experiments. I want to be a Robotics Engineer!"</p>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Priyanka More</span>
+            <span class="testimonial-village">Hiware Bazar, Maharashtra</span>
+          </div>
+        </div>
+        <!-- Story 3 -->
+        <div class="testimonial-card glass-card">
+          <p class="testimonial-text">"Learning Python programming through gamified levels was amazing. The points and badge system kept me motivated every single day. I am coding my own simple games now."</p>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Suresh Rathod</span>
+            <span class="testimonial-village">Ralegan Siddhi, Maharashtra</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="section-padding" style="background: radial-gradient(circle, rgba(108,76,241,0.08) 0%, transparent 70%); border-top: 1px solid var(--border-color);">
+    <div class="container text-center" style="max-width: 800px;">
+      <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Are You Ready to Start Your Quest?</h2>
+      <p style="color: var(--text-muted); margin-bottom: 36px; font-size: 1.1rem;">Overcome your STEM anxieties, complete challenges, win coins, and represent your village on the national leaderboard.</p>
+      <a href="pages/dashboard.html" class="btn btn-primary btn-accent" style="padding: 16px 40px; font-size: 1.1rem;">Create Your STEM Profile 🚀</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <h3 style="margin-bottom: 20px; font-size: 1.4rem; color: var(--primary);">STEM Quest</h3>
+          <p>Empowering rural students in classes 6-12 to overcome STEM fear through high-fidelity games, quizzes, and hands-on virtual labs.</p>
+          <p style="margin-top: 10px;">🔥 Real-time engagement. Zero barriers.</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 20px;">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="pages/subjects.html">STEM Subjects</a></li>
+            <li><a href="pages/challenges.html">Daily Challenges</a></li>
+            <li><a href="pages/leaderboard.html">Leaderboard</a></li>
+            <li><a href="pages/resources.html">Resources Center</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 20px;">Dashboard Access</h4>
+          <ul class="footer-links">
+            <li><a href="pages/dashboard.html">Student Profile</a></li>
+            <li><a href="pages/dashboard.html?role=teacher">Teacher Portal</a></li>
+            <li><a href="pages/dashboard.html?role=parent">Parent Portal</a></li>
+            <li><a href="pages/career.html">Career Roadmaps</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4 style="margin-bottom: 20px;">Get in Touch</h4>
+          <p>📧 vaishnavichoudhari190@gmail.com</p>
+          <p>📍 Maharashtra, India</p>
+          <p>🏫 Supported by Gram Vikas Schools</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 STEM Quest Platform. All Rights Reserved.</p>
+        <p>Designed and Developed by <a href="mailto:vaishnavichoudhari190@gmail.com" class="developer-credit">Vaishnavi J. Choudhari</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DYNAMIC GRADIENT DEF FOR SVG -->
+  <svg width="0" height="0">
+    <defs>
+      <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(200 200) rotate(90) scale(180)">
+        <stop stop-color="var(--primary)" stop-opacity="0.15"/>
+        <stop offset="1" stop-color="var(--background)" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <!-- STATE ENGINE SCRIPT -->
+  <script src="script.js"></script>
+</body>
+</html>
